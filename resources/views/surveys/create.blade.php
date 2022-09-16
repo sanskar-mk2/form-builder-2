@@ -9,16 +9,13 @@
                             <x-remove x-on:click="remove(index)" />
                         </div>
                         <template x-if="content.type=='text' || content.type=='description'">
-                            <div class="flex flex-col gap-4">
-                                <input placeholder="name" x-model="content.name" type="text" class="input input-bordered w-full max-w-xs" >
-                                <input placeholder="label" x-model="content.label" type="text" class="input input-bordered w-full max-w-xs" >
-                            </div>
+                            <x-template-text />
                         </template>
                     </div>
                 </div>
             </template>
         </div>
-        <div class="dropdown">
+        <div x-bind:class="add_dd ? 'pb-96' : 'pb-32'" class="dropdown">
             <label x-on:click="add_dd=true"
                 tabindex="0" class="btn m-1 w-24">
                 Add
@@ -27,10 +24,10 @@
                 x-on:click.outside="add_dd=false"
                 tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
                 <li>
-                    <a x-on:click="add_text">Text</a>
+                    <a x-on:click="add_text; add_dd=false">Text</a>
                 </li>
                 <li>
-                    <a x-on:click="add_description">Description</a>
+                    <a x-on:click="add_description; add_dd=false">Description</a>
                 </li>
                 <li><a>Select</a></li>
                 <li><a>Checkbox</a></li>
