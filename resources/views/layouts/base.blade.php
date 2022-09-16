@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-theme="cupcake">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,8 +11,8 @@
 
     </head>
     <body class="antialiased">
-        <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
-
+        <div class="relative bg-base-200 flex flex-col items-top min-h-screen sm:items-center py-4 sm:pt-0">
+            @include('layouts.nav')
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
                 {{ $slot }}
             </div>
