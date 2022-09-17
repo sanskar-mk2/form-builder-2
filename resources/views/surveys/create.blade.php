@@ -11,6 +11,9 @@
                         <template x-if="content.type=='text' || content.type=='description'">
                             <x-template-text />
                         </template>
+                        <template x-if="content.type=='select'">
+                            <x-template-select />
+                        </template>
                     </div>
                 </div>
             </template>
@@ -29,7 +32,9 @@
                 <li>
                     <a x-on:click="add_description; add_dd=false">Description</a>
                 </li>
-                <li><a>Select</a></li>
+                <li>
+                    <a x-on:click="add_select; add_dd=false">Select</a>
+                </li>
                 <li><a>Checkbox</a></li>
                 <li><a>Radio</a></li>
             </ul>

@@ -16,6 +16,21 @@ export default function handler() {
                 label: "",
             });
         },
+        add_select() {
+            this.contents.push({
+                type: "select",
+                name: "",
+                label: "",
+                options: [],
+            });
+            console.log(this.contents);
+        },
+        add_option(index) {
+            this.contents[index].options.push({ option: "", value: "" });
+        },
+        remove_option(index, op_index) {
+            this.contents[index].options.splice(op_index, 1);
+        },
         remove(index) {
             console.log(this.contents);
             this.contents.splice(index, 1);
