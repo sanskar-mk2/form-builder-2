@@ -1,6 +1,7 @@
 export default function handler() {
     return {
         add_dd: false,
+        dragging: false,
         contents: [],
         add_text() {
             this.contents.push({
@@ -35,5 +36,10 @@ export default function handler() {
             console.log(this.contents);
             this.contents.splice(index, 1);
         },
+        reorder(src_idx, target_idx) {
+            const temp = this.contents[src_idx];
+            this.contents[src_idx] = this.contents[target_idx];
+            this.contents[target_idx] = temp;
+        }
     };
 }
