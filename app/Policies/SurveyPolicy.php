@@ -53,7 +53,7 @@ class SurveyPolicy
      */
     public function update(User $user, Survey $survey)
     {
-        //
+        return true;
     }
 
     /**

@@ -36,7 +36,13 @@ class SurveyController extends Controller
      */
     public function store(StoreSurveyRequest $request)
     {
-        dd($request);
+        $survey = Survey::create(
+            [
+                'name' => $request->name,
+                'contents' => $request->contents,
+            ]
+        );
+        dd($survey);
     }
 
     /**
@@ -47,7 +53,7 @@ class SurveyController extends Controller
      */
     public function show(Survey $survey)
     {
-        //
+        return $survey;
     }
 
     /**
@@ -58,7 +64,8 @@ class SurveyController extends Controller
      */
     public function edit(Survey $survey)
     {
-        //
+        return view('surveys.edit')
+            ->with(['survey' => $survey]);
     }
 
     /**
@@ -70,7 +77,9 @@ class SurveyController extends Controller
      */
     public function update(UpdateSurveyRequest $request, Survey $survey)
     {
-        //
+        $survey->name = $request->name;
+        $survey->contents = $request->contents;
+        $survey->save();
     }
 
     /**

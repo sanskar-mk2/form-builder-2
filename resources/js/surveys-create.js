@@ -1,8 +1,9 @@
-export default function handler() {
+export default function handler(initial_content = []) {
+    console.log(initial_content);
     return {
         add_dd: false,
         dragging: false,
-        contents: [],
+        contents: initial_content,
         add_text() {
             this.contents.push({
                 type: "text",
