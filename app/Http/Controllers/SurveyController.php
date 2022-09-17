@@ -36,7 +36,7 @@ class SurveyController extends Controller
      */
     public function store(StoreSurveyRequest $request)
     {
-        //
+        dd($request);
     }
 
     /**

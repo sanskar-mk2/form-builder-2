@@ -1,13 +1,19 @@
 <x-base-layout>
     <section x-data="handler" class="w-full">
+        <form class="form-control pt-4 gap-4" method="POST" action="{{ route('surveys.store') }}">
+            @csrf
+            <input placeholder="Survey Name" name="name" type="text" class="input input-bordered w-full max-w-xs" >
+            <input x-bind:value="JSON.stringify(contents)" name="contents" type="hidden" class="input input-bordered w-full max-w-xs" >
+            <input type="submit" class="btn w-36 btn-primary" >
+        </form>
         <div class="flex flex-col gap-4 w-full my-4">
             <template x-for="(content, index) in contents" :key="index">
                 <div class="card w-full bg-base-100 shadow-xl">
+                    <div class="px-4 py-2 bg-base-300 card-actions items-center justify-between">
+                        <h3 class="font-extrabold text-2xl text-secondary" x-text="content.type.toUpperCase()"></h3>
+                        <x-remove x-on:click="remove(index)" />
+                    </div>
                     <div class="card-body">
-                        <div class="card-actions items-center justify-between">
-                            <p class="font-bold" x-text="content.type.toUpperCase()"></p>
-                            <x-remove x-on:click="remove(index)" />
-                        </div>
                         <template x-if="content.type=='text' || content.type=='description'">
                             <x-template-text />
                         </template>
