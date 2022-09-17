@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\User;
+
 class EnumHelper
 {
     /** Values */
@@ -24,5 +26,12 @@ class EnumHelper
     public static function vk(array $e): array
     {
         return array_column($e, 'name', 'value');
+    }
+}
+
+if (!function_exists('auther')) {
+    function auther(): User
+    {
+        return auth()->user();
     }
 }
