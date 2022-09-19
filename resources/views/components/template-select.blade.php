@@ -4,6 +4,7 @@
     <table class="table">
         <thead>
             <tr>
+                <th></th>
                 <th>Value</th>
                 <th>Label</th>
                 <th>Actions</th>
@@ -12,6 +13,9 @@
         <tbody>
             <template x-for="(option, op_index) in content.options" :key="`${index}.${op_index}`">
                 <tr>
+                    <td x-text="op_index+1">
+                        {{-- Index --}}
+                    </td>
                     <td>
                         <input placeholder="value" x-model="option.value" type="text" class="input input-bordered w-full max-w-xs" >
                     </td>

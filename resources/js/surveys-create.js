@@ -1,5 +1,4 @@
 export default function handler(initial_content = []) {
-    console.log(initial_content);
     return {
         add_dd: false,
         dragging: false,
@@ -41,6 +40,46 @@ export default function handler(initial_content = []) {
             const temp = this.contents[src_idx];
             this.contents[src_idx] = this.contents[target_idx];
             this.contents[target_idx] = temp;
-        }
+        },
+        validate() {
+            for (let i = 0; i < this.contents.length; i++) {
+                const self = this.contents[i];
+                if (!self.name) {
+                    console.log(
+                        `Missing name at ${i + 1}. ${self.type.toUpperCase()}`
+                    );
+                    return 1;
+                }
+                if (!self.label) {
+                    console.log(
+                        `Missing label at ${i + 1}. ${self.type.toUpperCase()}`
+                    );
+                    return 1;
+                }
+                if (self.hasOwnProperty("options")) {
+                    for (let j = 0; j < self.options.length; j++) {
+                        const selfop = self.options[j];
+                        if (!selfop.value) {
+                            console.log(
+                                `Missing value at ${
+                                    i + 1
+                                }. ${self.type.toUpperCase()} - Option ${j + 1}`
+                            );
+                            return 1;
+                        }
+                        if (!selfop.option) {
+                            console.log(
+                                `Missing label at ${
+                                    i + 1
+                                }. ${self.type.toUpperCase()} - Option ${j + 1}`
+                            );
+                            return 1;
+                        }
+                    }
+                }
+            }
+            console.log("validate success");
+            return 0;
+        },
     };
 }
