@@ -4,7 +4,7 @@
             @csrf
             @method('PATCH')
             <input placeholder="Survey Name" value="{{ $survey->name }}" name="name" type="text" class="input input-bordered w-full max-w-xs" >
-            <input x-bind:value="JSON.stringify(contents)" name="contents" type="hidden" class="input input-bordered w-full max-w-xs" >
+            <input x-bind:value="JSON.stringify(contents)" name="contents" type="hidden" >
             <input type="submit" class="btn w-36 btn-primary" >
         </form>
         <div class="flex flex-col gap-4 w-full my-4">
