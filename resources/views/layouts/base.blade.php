@@ -11,9 +11,9 @@
 
     </head>
     <body class="antialiased">
-        <div class="relative bg-base-200 flex flex-col items-top min-h-screen sm:items-center py-4 sm:pt-0">
+        <div class="relative bg-base-100 flex flex-col items-top min-h-screen sm:items-center sm:pt-0">
             @include('layouts.nav')
-            <div class="container">
+            <div class="container grow bg-base-300">
                 {{ $slot }}
             </div>
         </div>
