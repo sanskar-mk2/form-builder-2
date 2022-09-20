@@ -42,7 +42,7 @@ class SurveyController extends Controller
                 'contents' => $request->contents,
             ]
         );
-        dd($survey);
+        return redirect()->route('filament.resources.surveys.index');
     }
 
     /**

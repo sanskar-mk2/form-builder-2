@@ -8,6 +8,9 @@ use App\Filament\Resources\SurveyResource\RelationManagers;
 use App\Helpers\EnumHelper;
 use App\Models\Survey;
 use Filament\Forms;
+use Filament\Forms\Components\Placeholder;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
@@ -26,7 +29,15 @@ class SurveyResource extends Resource
     {
         return $form
             ->schema([
-                //
+                TextInput::make('id')
+                    ->visibleOn('view'),
+                TextInput::make('name')
+                    ->required(),
+                Select::make('status')
+                    ->options(SurveyStatus::class)
+                    ->visibleOn('view'),
+                TextInput::make('fields_count')
+                    ->visibleOn('view'),
             ]);
     }
 
@@ -37,7 +48,8 @@ class SurveyResource extends Resource
                 TextColumn::make('id'),
                 TextColumn::make('name'),
                 TextColumn::make('status')
-                    ->formatStateUsing(fn (int $state): string => EnumHelper::vk(SurveyStatus::cases())[$state])
+                    ->formatStateUsing(fn (int $state): string => EnumHelper::vk(SurveyStatus::cases())[$state]),
+                TextColumn::make('fields_count')
             ])
             ->filters([
                 //
@@ -47,17 +59,17 @@ class SurveyResource extends Resource
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                // Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -66,5 +78,5 @@ class SurveyResource extends Resource
             'view' => Pages\ViewSurvey::route('/{record}'),
             'edit' => Pages\EditSurvey::route('/{record}/edit'),
         ];
-    }    
+    }
 }

@@ -19,6 +19,6 @@ class ListSurveys extends ListRecords
 
     public function create()
     {
-        return redirect(route('surveys.create'));
+        return redirect()->route('surveys.create');
     }
 }

@@ -30,7 +30,7 @@ class SurveyPolicy
      */
     public function view(User $user, Survey $survey)
     {
-        //
+        return true;
     }
 
     /**
