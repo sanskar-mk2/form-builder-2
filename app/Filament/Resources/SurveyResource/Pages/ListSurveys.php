@@ -13,7 +13,12 @@ class ListSurveys extends ListRecords
     protected function getActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\Action::make('create')->action('create'),
         ];
+    }
+
+    public function create()
+    {
+        return redirect(route('surveys.create'));
     }
 }
