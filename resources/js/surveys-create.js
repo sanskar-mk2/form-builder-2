@@ -8,6 +8,7 @@ export default function handler(initial_content = []) {
                 type: "text",
                 name: "",
                 label: "",
+                required: false,
             });
         },
         add_description() {
@@ -15,6 +16,7 @@ export default function handler(initial_content = []) {
                 type: "description",
                 name: "",
                 label: "",
+                required: false,
             });
         },
         add_select() {
@@ -23,6 +25,7 @@ export default function handler(initial_content = []) {
                 name: "",
                 label: "",
                 options: [],
+                required: false,
             });
             console.log(this.contents);
         },
