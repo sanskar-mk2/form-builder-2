@@ -1,6 +1,5 @@
 <div class="flex flex-col gap-4">
-    <input placeholder="name" x-model="content.name" type="text" class="input input-bordered w-full max-w-xs" >
-    <input placeholder="label" x-model="content.label" type="text" class="input input-bordered w-full max-w-xs" >
+    <input placeholder="label" x-on:keyup="set_names" x-model="content.label" type="text" class="input input-bordered w-full max-w-xs" >
     <table class="table">
         <thead>
             <tr>
@@ -17,10 +16,10 @@
                         {{-- Index --}}
                     </td>
                     <td>
-                        <input placeholder="value" x-model="option.value" type="text" class="input input-bordered w-full max-w-xs" >
+                        <input placeholder="value" readonly x-model="option.value" type="text" class="input input-bordered w-full max-w-xs" >
                     </td>
                     <td>
-                        <input placeholder="option" x-model="option.option" type="text" class="input input-bordered w-full max-w-xs" >
+                        <input placeholder="option" x-on:keyup="option.value=slugify(option.option)" x-model="option.option" type="text" class="input input-bordered w-full max-w-xs" >
                     </td>
                     <td>
                         <x-remove x-on:click="remove_option(index, op_index)" />
