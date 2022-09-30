@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SurveyController;
@@ -23,3 +24,4 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::post('/authenticate', [AuthController::class, 'authenticate'])
     ->name('authenticate');
 Route::resource('/surveys', SurveyController::class);
+Route::resource('/answers', AnswerController::class);
