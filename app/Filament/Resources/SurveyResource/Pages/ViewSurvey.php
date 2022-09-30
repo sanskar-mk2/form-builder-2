@@ -16,6 +16,8 @@ class ViewSurvey extends ViewRecord
     {
         $ret = [];
         if ($this->record->status == SurveyStatus::Unpublished->value) {
+            $ret[] = Actions\Action::make('survey_editor')
+                ->action('survey_editor');
             $ret[] = Actions\Action::make('publish')
                 ->action('publish')
                 ->requiresConfirmation();
@@ -37,7 +39,7 @@ class ViewSurvey extends ViewRecord
         $this->record->save();
 
         Notification::make()
-            ->title('Published Survey: '.$this->record->name)
+            ->title('Published Survey: ' . $this->record->name)
             ->success()
             ->send();
         $this->redirect($this->getResource()::getUrl('index'));
@@ -49,9 +51,14 @@ class ViewSurvey extends ViewRecord
         $this->record->save();
 
         Notification::make()
-            ->title('Survey Marked Done: '.$this->record->name)
+            ->title('Survey Marked Done: ' . $this->record->name)
             ->success()
             ->send();
         $this->redirect($this->getResource()::getUrl('index'));
+    }
+
+    public function survey_editor()
+    {
+        $this->redirect(route('surveys.edit', $this->record->id));
     }
 }
