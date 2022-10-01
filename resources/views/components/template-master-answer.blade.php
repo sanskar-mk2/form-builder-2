@@ -13,7 +13,7 @@
                         <option :value="option.value" x-text="option.option"></option>
                     </template>
                 </select>
-                <input x-show="readonly" readonly type="text" :value="item.options.find(e => e.value === contents[item.name]).option" class="input input-bordered w-full max-w-xs" />
+                <input x-show="readonly" readonly type="text" :value="readonly ? item.options.find(e => e.value === contents[item.name]).option : ''" class="input input-bordered w-full max-w-xs" />
             </div>
         </template>
         <template x-if="item.type=='description'">

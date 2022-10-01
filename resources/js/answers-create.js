@@ -16,5 +16,15 @@ export default function answer_data(survey, initial_content = {}) {
         disable() {
             this.disabled = true;
         },
+        validate_required() {
+            for (let i = 0; i < this.survey.length; i++) {
+                const self = this.survey[i];
+                if (self.required && !this.contents[self.name]) {
+                    console.log("Required field is empty");
+                    return 1;
+                }
+            }
+            return 0;
+        },
     };
 }
