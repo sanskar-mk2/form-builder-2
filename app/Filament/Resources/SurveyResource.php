@@ -17,6 +17,7 @@ use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class SurveyResource extends Resource
@@ -49,7 +50,9 @@ class SurveyResource extends Resource
                 TextColumn::make('name'),
                 TextColumn::make('status')
                     ->formatStateUsing(fn (int $state): string => EnumHelper::vk(SurveyStatus::cases())[$state]),
-                TextColumn::make('fields_count')
+                TextColumn::make('fields_count'),
+                TextColumn::make('answers_count')
+                    ->getStateUsing(fn (Model $record) => $record->answers()->count()),
             ])
             ->filters([
                 //
