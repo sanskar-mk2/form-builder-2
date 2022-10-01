@@ -13,7 +13,7 @@ class StoreAnswerRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,8 @@ class StoreAnswerRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'survey_id' => 'required|exists:surveys,id',
+            'contents' => 'required|json',
         ];
     }
 }

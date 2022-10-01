@@ -40,7 +40,7 @@ class AnswerController extends Controller
      */
     public function store(StoreAnswerRequest $request)
     {
-        //
+        $answer = Answer::create($request->validated());
     }
 
     /**
