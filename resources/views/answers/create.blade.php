@@ -5,7 +5,7 @@
         <form class="form-control pt-4 gap-4" method="POST" action="{{ route('answers.store') }}">
             @csrf
             <input name="survey_id" type="hidden" value="{{ $survey->id }}">
-            <input name="contents" type="hidden" x-bind:value="contents">
+            <input name="contents" type="hidden" x-bind:value="JSON.stringify(contents)">
             <input type="submit" class="btn w-36 btn-primary" >
         </form>
         <template x-for="(item, index) in survey" :key="index">
@@ -17,8 +17,8 @@
                             <span x-text="item.label" class="label-text"></span>
                             <span class="font-bold text-error" x-show="item.required">*</span>
                         </label>
-                        <select :name="item.name" :id="item.name" class="select select-bordered">
-                            <option disabled selected>Pick one</option>
+                        <select x-model="contents[item.name]" :name="item.name" :id="item.name" class="select select-bordered">
+                            <option disabled selected value="">Pick one</option>
                             <template x-for="(option, op_index) in item.options" :key="op_index">
                                 <option :value="option.value" x-text="option.option"></option>
                             </template>
@@ -31,7 +31,7 @@
                             <span x-text="item.label" class="label-text"></span>
                             <span class="font-bold text-error" x-show="item.required">*</span>
                         </label> 
-                        <textarea :id="item.name" :name="item.name" class="textarea textarea-bordered h-24" placeholder="Write here..."></textarea>
+                        <textarea x-model="contents[item.name]" :id="item.name" :name="item.name" class="textarea textarea-bordered h-24" placeholder="Write here..."></textarea>
                     </div>
                 </template>
                 <hr class="mt-4">
