@@ -51,7 +51,7 @@ class AnswerController extends Controller
      */
     public function show(Answer $answer)
     {
-        //
+        return view('answers.show', compact('answer'));
     }
 
     /**

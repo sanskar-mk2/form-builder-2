@@ -4,7 +4,7 @@
             <span x-text="item.label" class="label-text"></span>
             <span class="font-bold text-error" x-show="item.required">*</span>
         </label>
-        <input x-model="contents[item.name]" type="text" :name="item.name" :id="item.name"
+        <input :disabled="disabled" :readonly="readonly" x-model="contents[item.name]" type="text" :name="item.name" :id="item.name"
             class="input input-bordered w-full max-w-xs" />
     </div>
 </template>

@@ -7,12 +7,13 @@
                     <span x-text="item.label" class="label-text"></span>
                     <span class="font-bold text-error" x-show="item.required">*</span>
                 </label>
-                <select x-model="contents[item.name]" :name="item.name" :id="item.name" class="select select-bordered">
+                <select :disabled="disabled" x-show="!readonly" x-model="contents[item.name]" :name="item.name" :id="item.name" class="select select-bordered">
                     <option disabled selected value="">Pick one</option>
                     <template x-for="(option, op_index) in item.options" :key="op_index">
                         <option :value="option.value" x-text="option.option"></option>
                     </template>
                 </select>
+                <input x-show="readonly" readonly type="text" :value="item.options.find(e => e.value === contents[item.name]).option" class="input input-bordered w-full max-w-xs" />
             </div>
         </template>
         <template x-if="item.type=='description'">
@@ -21,7 +22,7 @@
                     <span x-text="item.label" class="label-text"></span>
                     <span class="font-bold text-error" x-show="item.required">*</span>
                 </label> 
-                <textarea x-model="contents[item.name]" :id="item.name" :name="item.name" class="textarea textarea-bordered h-24" placeholder="Write here..."></textarea>
+                <textarea :disabled="disabled" :readonly="readonly" x-model="contents[item.name]" :id="item.name" :name="item.name" class="textarea textarea-bordered h-24" placeholder="Write here..."></textarea>
             </div>
         </template>
         <hr class="mt-4">

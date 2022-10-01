@@ -8,5 +8,13 @@ export default function answer_data(survey, initial_content = {}) {
     return {
         survey: survey,
         contents: contents,
+        readonly: false,
+        disabled: false,
+        make_readonly() {
+            this.readonly = true;
+        },
+        disable() {
+            this.disabled = true;
+        },
     };
 }
