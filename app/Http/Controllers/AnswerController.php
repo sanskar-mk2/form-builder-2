@@ -62,7 +62,7 @@ class AnswerController extends Controller
      */
     public function edit(Answer $answer)
     {
-        //
+        return view('answers.edit', compact('answer'));
     }
 
     /**
