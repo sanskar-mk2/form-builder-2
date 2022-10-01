@@ -18,7 +18,7 @@ class AnswerPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -30,7 +30,7 @@ class AnswerPolicy
      */
     public function view(User $user, Answer $answer)
     {
-        //
+        return true;
     }
 
     /**

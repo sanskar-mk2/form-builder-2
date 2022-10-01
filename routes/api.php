@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\LogoutController;
+use App\Http\Controllers\Api\SurveyController;
+use App\Http\Controllers\Api\AnswerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +21,8 @@ use Illuminate\Support\Facades\Route;
 Route::post('/login', LoginController::class);
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/logout', LogoutController::class);
+    Route::apiResource('/surveys', SurveyController::class);
+    Route::apiResource('/answers', AnswerController::class);
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
