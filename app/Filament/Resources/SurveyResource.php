@@ -52,7 +52,7 @@ class SurveyResource extends Resource
                     ->formatStateUsing(fn (int $state): string => EnumHelper::vk(SurveyStatus::cases())[$state]),
                 TextColumn::make('fields_count'),
                 TextColumn::make('answers_count')
-                    ->getStateUsing(fn (Model $record) => $record->answers()->count()),
+                    ->getStateUsing(fn (Survey $record) => $record->answers()->count()),
             ])
             ->filters([
                 //

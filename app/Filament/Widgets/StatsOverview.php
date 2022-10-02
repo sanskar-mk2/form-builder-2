@@ -18,7 +18,7 @@ class StatsOverview extends BaseWidget
             Card::make('Surveys', Survey::count())
                 ->url(route('filament.resources.surveys.index')),
             Card::make('Answers', Answer::count())
-                // ->url(route('filament.resources.answers.index')),
+                ->url(route('filament.resources.answers.index')),
         ];
     }
 }
