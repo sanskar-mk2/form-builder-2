@@ -1,21 +1,25 @@
 import Chart from "chart.js/auto";
 import _ from "lodash";
+import uniqolor from "uniqolor";
 
 const make_chart = (canvas_id, data) => {
     const count = _.countBy(data.answers);
+    console.log(count);
+    const labels = Object.keys(count).map(
+        (value) =>
+            data.content.options.find((op) => op.value === value)?.option ??
+            "Did not answer"
+    );
     const ctx = document.getElementById(canvas_id).getContext("2d");
     const chart = new Chart(ctx, {
         type: "pie",
         data: {
-            labels: Object.keys(count).map(
-                (value) =>
-                    data.content.options.find((op) => op.value === value).option
-            ),
+            labels: labels,
             datasets: [
                 {
                     label: data.content.label,
                     data: Object.values(count),
-                    backgroundColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)"],
+                    backgroundColor: labels.map((l) => uniqolor(l).color),
                     hoverOffset: 4,
                 },
             ],
