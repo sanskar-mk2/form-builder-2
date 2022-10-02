@@ -3,6 +3,7 @@
 use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ResultController;
 use App\Http\Controllers\SurveyController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,3 +26,5 @@ Route::post('/authenticate', [AuthController::class, 'authenticate'])
     ->name('authenticate');
 Route::resource('/surveys', SurveyController::class);
 Route::resource('/answers', AnswerController::class);
+Route::get('/results/{survey}', [ResultController::class, 'show'])
+    ->name('results.show');

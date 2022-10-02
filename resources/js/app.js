@@ -1,5 +1,8 @@
 import "./bootstrap";
 import Alpine from "alpinejs";
+import { alpine_pie } from "./select-pie-chart";
+
+window.alpine_pie = alpine_pie;
 
 window.Alpine = Alpine;
 
