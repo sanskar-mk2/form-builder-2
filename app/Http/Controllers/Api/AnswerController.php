@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\AnswerCollection;
 use App\Models\Answer;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,7 @@ class AnswerController extends Controller
      */
     public function index()
     {
-        return Answer::all();
+        return new AnswerCollection(Answer::paginate());
     }
 
     /**
