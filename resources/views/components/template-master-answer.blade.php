@@ -35,8 +35,26 @@
                     <template x-for="(option, op_index) in item.options" :key="op_index">
                         <label class="label cursor-pointer w-fit">
                             <input :disabled="disabled||readonly" type="checkbox" x-model="contents[item.name]"
-                                :value="option.value" checked="checked" class="disabled:opacity-100 checkbox checkbox-primary" />
+                                :value="option.value" class="disabled:opacity-100 checkbox checkbox-primary" />
                             <span class="ml-1 label-text" x-text="option.option"></span> 
+                        </label>
+                    </template>
+                </div>
+            </div>
+        </template>
+        <template x-if="item.type=='radio'">
+            <div class="form-control">
+                <label :for="item.name" class="label justify-start gap-1">
+                    <span x-text="item.label" class="label-text"></span>
+                    <span class="font-bold text-error" x-show="item.required">*</span>
+                </label>
+                <div class="flex gap-8">
+                    <template x-for="(option, op_index) in item.options" :key="op_index">
+                        <label class="label w-fit cursor-pointer">
+                            <input :disabled="disabled||readonly" type="radio"
+                                :value="option.value" x-model="contents[item.name]"
+                                class="radio disabled:opacity-100 checked:bg-primary" />
+                            <span class="label-text ml-2" x-text="option.option"></span> 
                         </label>
                     </template>
                 </div>

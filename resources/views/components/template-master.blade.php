@@ -20,6 +20,9 @@
                 <template x-if="content.type=='checkbox'">
                     <x-template-checkbox />
                 </template>
+                <template x-if="content.type=='radio'">
+                    <x-template-radio />
+                </template>
                 <x-checkbox x-model="content.required" label="Required" />
             </div>
         </div>

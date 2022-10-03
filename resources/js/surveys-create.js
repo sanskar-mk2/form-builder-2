@@ -19,13 +19,21 @@ export default function handler(initial_content = []) {
                 options: [],
                 required: false,
             });
-            console.log(this.contents);
         },
         add_description() {
             this.contents.push({
                 type: "description",
                 name: "",
                 label: "",
+                required: false,
+            });
+        },
+        add_radio() {
+            this.contents.push({
+                type: "radio",
+                name: "",
+                label: "",
+                options: [],
                 required: false,
             });
         },
@@ -37,7 +45,6 @@ export default function handler(initial_content = []) {
                 options: [],
                 required: false,
             });
-            console.log(this.contents);
         },
         add_option(index) {
             this.contents[index].options.push({ option: "", value: "" });
