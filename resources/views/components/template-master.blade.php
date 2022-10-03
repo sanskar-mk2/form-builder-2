@@ -23,6 +23,9 @@
                 <template x-if="content.type=='radio'">
                     <x-template-radio />
                 </template>
+                <template x-if="content.type=='likert'">
+                    <x-template-likert />
+                </template>
                 <x-checkbox x-model="content.required" label="Required" />
             </div>
         </div>

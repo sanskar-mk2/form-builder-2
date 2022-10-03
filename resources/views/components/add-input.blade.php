@@ -21,5 +21,8 @@
         <li>
             <a x-on:click="add_radio;add_dd=false;">Radio</a>
         </li>
+        <li>
+            <a x-on:click="add_likert;add_dd=false;">Ranking (Likert Scale)</a>
+        </li>
     </ul>
 </div>

@@ -37,6 +37,21 @@ export default function handler(initial_content = []) {
                 required: false,
             });
         },
+        add_likert() {
+            this.contents.push({
+                type: "likert",
+                name: "",
+                label: "",
+                options: [
+                    { option: "Very Dissatisfied", value: 'very-dissatisfied' },
+                    { option: "Dissatisfied", value: 'dissatisfied' },
+                    { option: "Neutral", value: 'neutral' },
+                    { option: "Satisfied", value: 'satisfied' },
+                    { option: "Very Satisfied", value: 'very-satisfied' },
+                ],
+                required: false,
+            });
+        },
         add_select() {
             this.contents.push({
                 type: "select",
