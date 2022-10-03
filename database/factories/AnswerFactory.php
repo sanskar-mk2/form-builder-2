@@ -54,11 +54,17 @@ class AnswerFactory extends Factory
                 } else {
                     $contents[$content->name] = "";
                 }
-            } else if ($content->type == 'select') {
+            } else if ($content->type == 'select' || $content->type == 'radio') {
                 if ($content->required || rand(0, 1)) {
                     $contents[$content->name] = $this->faker->randomElement(array_column($content->options, 'value'));
                 } else {
                     $contents[$content->name] = "";
+                }
+            } else if ($content->type == 'checkbox') {
+                if ($content->required || rand(0, 1)) {
+                    $contents[$content->name] = $this->faker->randomElements(array_column($content->options, 'value'), rand(1, count($content->options)));
+                } else {
+                    $contents[$content->name] = [];
                 }
             }
         }

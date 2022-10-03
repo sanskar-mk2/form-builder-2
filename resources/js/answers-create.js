@@ -1,7 +1,7 @@
 export default function answer_data(survey, initial_content = {}) {
     const contents = {};
     survey.forEach((content) => {
-        if (content.type === "radio" || content.type === "checkbox") {
+        if (content.type === "checkbox") {
             contents[content.name] = initial_content[content.name] || [];
         } else {
             contents[content.name] = initial_content[content.name] || "";
@@ -22,7 +22,7 @@ export default function answer_data(survey, initial_content = {}) {
         validate_required() {
             for (let i = 0; i < this.survey.length; i++) {
                 const self = this.survey[i];
-                if (self.required && !this.contents[self.name]) {
+                if (self.required && !this.contents[self.name].length) {
                     console.log("Required field is empty");
                     return 1;
                 }

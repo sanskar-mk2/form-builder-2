@@ -89,6 +89,16 @@ export default function handler(initial_content = []) {
                 }
 
                 if (self.hasOwnProperty("options")) {
+                    // validate if options exist
+                    if (self.options.length === 0) {
+                        console.log(
+                            `Missing options at ${
+                                i + 1
+                            }. ${self.type.toUpperCase()} | Please add at least one option`
+                        );
+                        return 1;
+                    }
+
                     for (let j = 0; j < self.options.length; j++) {
                         const selfop = self.options[j];
 
