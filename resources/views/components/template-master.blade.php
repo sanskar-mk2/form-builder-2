@@ -17,6 +17,9 @@
                 <template x-if="content.type=='select'">
                     <x-template-select />
                 </template>
+                <template x-if="content.type=='checkbox'">
+                    <x-template-checkbox />
+                </template>
                 <x-checkbox x-model="content.required" label="Required" />
             </div>
         </div>

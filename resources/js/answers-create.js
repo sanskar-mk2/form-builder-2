@@ -1,10 +1,13 @@
 export default function answer_data(survey, initial_content = {}) {
-    const all_names = survey.map((content) => content.name);
     const contents = {};
-    for (let i = 0; i < all_names.length; i++) {
-        const name = all_names[i];
-        contents[name] = initial_content[name] || "";
-    }
+    survey.forEach((content) => {
+        if (content.type === "radio" || content.type === "checkbox") {
+            contents[content.name] = initial_content[content.name] || [];
+        } else {
+            contents[content.name] = initial_content[content.name] || "";
+        }
+    });
+
     return {
         survey: survey,
         contents: contents,

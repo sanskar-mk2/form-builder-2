@@ -11,6 +11,16 @@ export default function handler(initial_content = []) {
                 required: false,
             });
         },
+        add_checkbox() {
+            this.contents.push({
+                type: "checkbox",
+                name: "",
+                label: "",
+                options: [],
+                required: false,
+            });
+            console.log(this.contents);
+        },
         add_description() {
             this.contents.push({
                 type: "description",
