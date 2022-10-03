@@ -54,7 +54,11 @@ class AnswerFactory extends Factory
                 } else {
                     $contents[$content->name] = "";
                 }
-            } else if ($content->type == 'select' || $content->type == 'radio') {
+            } else if (
+                $content->type == 'select' ||
+                $content->type == 'radio' ||
+                $content->type == 'likert'
+            ) {
                 if ($content->required || rand(0, 1)) {
                     $contents[$content->name] = $this->faker->randomElement(array_column($content->options, 'value'));
                 } else {
@@ -65,6 +69,14 @@ class AnswerFactory extends Factory
                     $contents[$content->name] = $this->faker->randomElements(array_column($content->options, 'value'), rand(1, count($content->options)));
                 } else {
                     $contents[$content->name] = [];
+                }
+            } else if ($content->type == 'likert_grid') {
+                foreach ($content->questions as $question) {
+                    if ($content->required || rand(0, 1)) {
+                        $contents[$content->name][$question->name] = $this->faker->randomElement(array_column($content->options, 'value'));
+                    } else {
+                        $contents[$content->name][$question->name] = "";
+                    }
                 }
             }
         }

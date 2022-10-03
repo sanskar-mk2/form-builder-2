@@ -24,5 +24,8 @@
         <li>
             <a x-on:click="add_likert;add_dd=false;">Ranking (Likert Scale)</a>
         </li>
+        <li>
+            <a x-on:click="add_likert_grid;add_dd=false;">Ranking Grid</a>
+        </li>
     </ul>
 </div>

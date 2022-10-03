@@ -43,11 +43,27 @@ export default function handler(initial_content = []) {
                 name: "",
                 label: "",
                 options: [
-                    { option: "Very Dissatisfied", value: 'very-dissatisfied' },
-                    { option: "Dissatisfied", value: 'dissatisfied' },
-                    { option: "Neutral", value: 'neutral' },
-                    { option: "Satisfied", value: 'satisfied' },
-                    { option: "Very Satisfied", value: 'very-satisfied' },
+                    { option: "Very Dissatisfied", value: "very-dissatisfied" },
+                    { option: "Dissatisfied", value: "dissatisfied" },
+                    { option: "Neutral", value: "neutral" },
+                    { option: "Satisfied", value: "satisfied" },
+                    { option: "Very Satisfied", value: "very-satisfied" },
+                ],
+                required: false,
+            });
+        },
+        add_likert_grid() {
+            this.contents.push({
+                type: "likert_grid",
+                name: "",
+                label: "",
+                questions: [],
+                options: [
+                    { option: "Very Dissatisfied", value: "very-dissatisfied" },
+                    { option: "Dissatisfied", value: "dissatisfied" },
+                    { option: "Neutral", value: "neutral" },
+                    { option: "Satisfied", value: "satisfied" },
+                    { option: "Very Satisfied", value: "very-satisfied" },
                 ],
                 required: false,
             });
@@ -60,6 +76,12 @@ export default function handler(initial_content = []) {
                 options: [],
                 required: false,
             });
+        },
+        add_question(index) {
+            this.contents[index].questions.push({ label: "", name: "" });
+        },
+        remove_question(index, q_index) {
+            this.contents[index].questions.splice(q_index, 1);
         },
         add_option(index) {
             this.contents[index].options.push({ option: "", value: "" });
@@ -143,6 +165,58 @@ export default function handler(initial_content = []) {
                     if (new Set(all_op_names).size !== all_op_names.length) {
                         console.log(
                             `Options must be unique at ${
+                                i + 1
+                            }. ${self.type.toUpperCase()}`
+                        );
+                        return 1;
+                    }
+                }
+
+                // validate questions
+                if (self.hasOwnProperty("questions")) {
+                    // validate if questions exist
+                    if (self.questions.length === 0) {
+                        console.log(
+                            `Missing questions at ${
+                                i + 1
+                            }. ${self.type.toUpperCase()} | Please add at least one question`
+                        );
+                        return 1;
+                    }
+
+                    for (let j = 0; j < self.questions.length; j++) {
+                        const selfq = self.questions[j];
+
+                        // validate if all questions's names are filled
+                        if (!selfq.name) {
+                            console.log(
+                                `Missing name at ${
+                                    i + 1
+                                }. ${self.type.toUpperCase()} - Question ${
+                                    j + 1
+                                }`
+                            );
+                            return 1;
+                        }
+
+                        // validate if all questions's labels are filled
+                        if (!selfq.label) {
+                            console.log(
+                                `Missing label at ${
+                                    i + 1
+                                }. ${self.type.toUpperCase()} - Question ${
+                                    j + 1
+                                }`
+                            );
+                            return 1;
+                        }
+                    }
+
+                    // validate if all questions's names are unique
+                    const all_q_names = self.questions.map((q) => q.name);
+                    if (new Set(all_q_names).size !== all_q_names.length) {
+                        console.log(
+                            `Questions must be unique at ${
                                 i + 1
                             }. ${self.type.toUpperCase()}`
                         );

@@ -26,6 +26,9 @@
                 <template x-if="content.type=='likert'">
                     <x-template-likert />
                 </template>
+                <template x-if="content.type=='likert_grid'">
+                    <x-template-likert-grid />
+                </template>
                 <x-checkbox x-model="content.required" label="Required" />
             </div>
         </div>
