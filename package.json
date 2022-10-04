@@ -18,6 +18,7 @@
         "alpinejs": "^3.10.3",
         "chart.js": "^3.9.1",
         "daisyui": "^2.27.0",
+        "dayjs": "^1.11.5",
         "theme-change": "^2.2.0",
         "uniqolor": "^1.0.2"
     }

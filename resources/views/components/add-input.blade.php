@@ -27,5 +27,8 @@
         <li>
             <a x-on:click="add_likert_grid;add_dd=false;">Ranking Grid</a>
         </li>
+        <li>
+            <a x-on:click="add_date;add_dd=false;">Date</a>
+        </li>
     </ul>
 </div>

@@ -1,7 +1,11 @@
 import "./bootstrap";
 import Alpine from "alpinejs";
 import { alpine_pie } from "./select-pie-chart";
+import dayjs from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat";
+dayjs.extend(customParseFormat);
 
+window.dayjs = dayjs;
 window.Alpine = Alpine;
 
 import handler from "./surveys-create";

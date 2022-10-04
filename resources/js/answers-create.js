@@ -1,3 +1,7 @@
+import dayjs from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat";
+dayjs.extend(customParseFormat);
+
 export default function answer_data(survey, initial_content = {}) {
     const contents = {};
     survey.forEach((content) => {
@@ -23,9 +27,18 @@ export default function answer_data(survey, initial_content = {}) {
         disable() {
             this.disabled = true;
         },
+
         validate_required() {
             for (let i = 0; i < this.survey.length; i++) {
                 const self = this.survey[i];
+
+                // check if date is valid
+                if (self.type === "date") {
+                    if (this.contents[self.name] === "Invalid Date") {
+                        console.log("Invalid date");
+                        return 1;
+                    }
+                }
 
                 // separate validation for likert_grid
                 if (self.required && self.type === "likert_grid") {

@@ -77,6 +77,15 @@ export default function handler(initial_content = []) {
                 required: false,
             });
         },
+        add_date() {
+            this.contents.push({
+                type: "date",
+                name: "",
+                label: "",
+                required: false,
+                format: "YYYY-MM-DD",
+            });
+        },
         add_question(index) {
             this.contents[index].questions.push({ label: "", name: "" });
         },
@@ -123,6 +132,16 @@ export default function handler(initial_content = []) {
                         `Missing label at ${i + 1}. ${self.type.toUpperCase()}`
                     );
                     return 1;
+                }
+                
+                // validate date format is filled
+                if (self.hasOwnProperty("format")) {
+                    if (!self.format) {
+                        console.log(
+                            `Missing format at ${i + 1}. ${self.type.toUpperCase()}`
+                        );
+                        return 1;
+                    }
                 }
 
                 if (self.hasOwnProperty("options")) {
