@@ -41,6 +41,7 @@ class AnswerController extends Controller
     public function store(StoreAnswerRequest $request)
     {
         $answer = Answer::create($request->validated());
+        return redirect()->route('answers.show', $answer->id);
     }
 
     /**
