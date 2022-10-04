@@ -12,7 +12,7 @@
         <label class="label justify-start gap-1">
             <span class="label-text-alt">Date Format Required:</span>
             <span x-text="item.format" class="font-bold label-text-alt"></span>
-            <span x-show="local_date" :class="is_valid?'text-success':'text-error'"  x-text="is_valid?'Valid Format':'Invalid Fomat'" class="self-end flex-grow text-right label-text-alt">Valid?</span>
+            <span x-show="local_date && !(readonly || disabled)" :class="is_valid?'text-success':'text-error'"  x-text="is_valid?'Valid Format':'Invalid Fomat'" class="self-end flex-grow text-right label-text-alt">Valid?</span>
         </label>
         <div class="form-control">
         <label class="label w-fit cursor-pointer">

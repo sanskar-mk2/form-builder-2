@@ -78,6 +78,12 @@ class AnswerFactory extends Factory
                         $contents[$content->name][$question->name] = "";
                     }
                 }
+            } else if ($content->type == 'date') {
+                if ($content->required || rand(0, 1)) {
+                    $contents[$content->name] = $this->faker->date();
+                } else {
+                    $contents[$content->name] = "";
+                }
             }
         }
         return json_encode($contents);
