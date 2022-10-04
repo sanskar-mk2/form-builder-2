@@ -16,6 +16,7 @@
         <x-if-likert-answer />
         <x-if-likert-grid-answer />
         <x-if-date-answer />
+        <x-if-radio-grid-answer />
         <hr class="mt-4">
     </div>
 </template>

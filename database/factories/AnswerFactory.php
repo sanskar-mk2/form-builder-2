@@ -70,7 +70,7 @@ class AnswerFactory extends Factory
                 } else {
                     $contents[$content->name] = [];
                 }
-            } else if ($content->type == 'likert_grid') {
+            } else if ($content->type == 'likert_grid' || $content->type == 'radio_grid') {
                 foreach ($content->questions as $question) {
                     if ($content->required || rand(0, 1)) {
                         $contents[$content->name][$question->name] = $this->faker->randomElement(array_column($content->options, 'value'));

@@ -68,6 +68,16 @@ export default function handler(initial_content = []) {
                 required: false,
             });
         },
+        add_radio_grid() {
+            this.contents.push({
+                type: "radio_grid",
+                name: "",
+                label: "",
+                questions: [],
+                options: [],
+                required: false,
+            });
+        },
         add_select() {
             this.contents.push({
                 type: "select",

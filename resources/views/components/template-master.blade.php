@@ -32,6 +32,9 @@
                 <template x-if="content.type=='date'">
                     <x-template-date />
                 </template>
+                <template x-if="content.type=='radio_grid'">
+                    <x-template-radio-grid />
+                </template>
                 <x-checkbox x-model="content.required" label="Required" />
             </div>
         </div>

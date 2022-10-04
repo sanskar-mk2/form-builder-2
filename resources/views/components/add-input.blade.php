@@ -30,5 +30,8 @@
         <li>
             <a x-on:click="add_date;add_dd=false;">Date</a>
         </li>
+        <li>
+            <a x-on:click="add_radio_grid;add_dd=false;">Radio Grid</a>
+        </li>
     </ul>
 </div>
