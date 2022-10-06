@@ -1,9 +1,11 @@
 <x-base-layout>
-    <section x-data="handler(@js($survey->contents))" class="w-full">
-        <form x-on:submit.prevent="()=>{const ret=validate(); if (! ret) $event.target.submit();}" class="form-control pt-4 gap-4" method="POST" action="{{ route('surveys.update', $survey->id) }}">
+    <section x-init="console.log(contents)" x-data="handler({{ old('contents') ?? 0 }} || @js($survey->contents))" class="w-full">
+        <form x-on:submit.prevent="()=>{error=validate(); if (! error) $event.target.submit();}" class="form-control pt-4 gap-4" method="POST" action="{{ route('surveys.update', $survey->id) }}">
             @csrf
             @method('PATCH')
             <input placeholder="Survey Name" value="{{ $survey->name }}" name="name" type="text" class="input input-bordered w-full max-w-xs" >
+            <p class="text-error" x-text="error ? error : ''"></p>
+            @error('name')<p class="text-error">{{ $message }}</p>@enderror
             <input x-bind:value="JSON.stringify(contents)" name="contents" type="hidden" >
             <input type="submit" class="btn w-36 btn-primary" >
         </form>

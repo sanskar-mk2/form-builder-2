@@ -7,6 +7,7 @@ export default function handler(initial_content = []) {
         dragging: false,
         fake: null,
         over: null,
+        error: "",
         contents: initial_content,
         add_text() {
             this.contents.push({
