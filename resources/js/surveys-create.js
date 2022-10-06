@@ -1,7 +1,12 @@
+import validate from "./surveys-create-validate.js";
+
 export default function handler(initial_content = []) {
     return {
+        dragged: null,
         add_dd: false,
         dragging: false,
+        fake: null,
+        over: null,
         contents: initial_content,
         add_text() {
             this.contents.push({
@@ -112,149 +117,8 @@ export default function handler(initial_content = []) {
             console.log(this.contents);
             this.contents.splice(index, 1);
         },
-        reorder(src_idx, target_idx) {
-            const temp = this.contents[src_idx];
-            this.contents[src_idx] = this.contents[target_idx];
-            this.contents[target_idx] = temp;
-        },
         validate() {
-            // validate if all labels and thus names are unique
-            const all_names = this.contents.map((content) => content.name);
-            if (new Set(all_names).size !== all_names.length) {
-                console.log("Name must be unique");
-                return 1;
-            }
-
-            for (let i = 0; i < this.contents.length; i++) {
-                const self = this.contents[i];
-
-                // validate if all names are filled
-                if (!self.name) {
-                    console.log(
-                        `Missing name at ${i + 1}. ${self.type.toUpperCase()}`
-                    );
-                    return 1;
-                }
-
-                // validate if all labels are filled
-                if (!self.label) {
-                    console.log(
-                        `Missing label at ${i + 1}. ${self.type.toUpperCase()}`
-                    );
-                    return 1;
-                }
-                
-                // validate date format is filled
-                if (self.hasOwnProperty("format")) {
-                    if (!self.format) {
-                        console.log(
-                            `Missing format at ${i + 1}. ${self.type.toUpperCase()}`
-                        );
-                        return 1;
-                    }
-                }
-
-                if (self.hasOwnProperty("options")) {
-                    // validate if options exist
-                    if (self.options.length === 0) {
-                        console.log(
-                            `Missing options at ${
-                                i + 1
-                            }. ${self.type.toUpperCase()} | Please add at least one option`
-                        );
-                        return 1;
-                    }
-
-                    for (let j = 0; j < self.options.length; j++) {
-                        const selfop = self.options[j];
-
-                        // validate if all option's values are filled
-                        if (!selfop.value) {
-                            console.log(
-                                `Missing value at ${
-                                    i + 1
-                                }. ${self.type.toUpperCase()} - Option ${j + 1}`
-                            );
-                            return 1;
-                        }
-
-                        // validate if all option's labels are filled
-                        if (!selfop.option) {
-                            console.log(
-                                `Missing label at ${
-                                    i + 1
-                                }. ${self.type.toUpperCase()} - Option ${j + 1}`
-                            );
-                            return 1;
-                        }
-                    }
-
-                    // validate if all option's values are unique
-                    const all_op_names = self.options.map((op) => op.value);
-                    if (new Set(all_op_names).size !== all_op_names.length) {
-                        console.log(
-                            `Options must be unique at ${
-                                i + 1
-                            }. ${self.type.toUpperCase()}`
-                        );
-                        return 1;
-                    }
-                }
-
-                // validate questions
-                if (self.hasOwnProperty("questions")) {
-                    // validate if questions exist
-                    if (self.questions.length === 0) {
-                        console.log(
-                            `Missing questions at ${
-                                i + 1
-                            }. ${self.type.toUpperCase()} | Please add at least one question`
-                        );
-                        return 1;
-                    }
-
-                    for (let j = 0; j < self.questions.length; j++) {
-                        const selfq = self.questions[j];
-
-                        // validate if all questions's names are filled
-                        if (!selfq.name) {
-                            console.log(
-                                `Missing name at ${
-                                    i + 1
-                                }. ${self.type.toUpperCase()} - Question ${
-                                    j + 1
-                                }`
-                            );
-                            return 1;
-                        }
-
-                        // validate if all questions's labels are filled
-                        if (!selfq.label) {
-                            console.log(
-                                `Missing label at ${
-                                    i + 1
-                                }. ${self.type.toUpperCase()} - Question ${
-                                    j + 1
-                                }`
-                            );
-                            return 1;
-                        }
-                    }
-
-                    // validate if all questions's names are unique
-                    const all_q_names = self.questions.map((q) => q.name);
-                    if (new Set(all_q_names).size !== all_q_names.length) {
-                        console.log(
-                            `Questions must be unique at ${
-                                i + 1
-                            }. ${self.type.toUpperCase()}`
-                        );
-                        return 1;
-                    }
-                }
-            }
-            console.log("validate success");
-            return 0;
+            return validate(this.contents);
         },
         set_names() {
             for (let i = 0; i < this.contents.length; i++) {
@@ -271,6 +135,60 @@ export default function handler(initial_content = []) {
                 .replace(/\-\-+/g, "-") // Replace multiple - with single -
                 .replace(/^-+/, "") // Trim - from start of text
                 .replace(/-+$/, ""); // Trim - from end of text
+        },
+        dragstart(idx, node) {
+            this.dragging = true;
+            this.dragged = idx;
+            this.fake = node.cloneNode();
+            const other_attr = [...this.fake.attributes].filter(
+                (attr) => attr.name !== "class" && attr.name !== "dropzone"
+            );
+
+            other_attr.forEach((attr) => {
+                this.fake.removeAttribute(attr.name);
+            });
+            this.fake.addEventListener("dragover", (e) => {
+                e.preventDefault();
+            });
+            this.fake.style.height = `${node.offsetHeight}px`;
+            this.fake.style.width = `${node.offsetWidth}px`;
+            this.fake.style.opacity = "50%";
+            this.fake.style.hidden = false;
+        },
+        dragend(e) {
+            if (e.dataTransfer.dropEffect === "move") {
+                const dragged = this.contents[this.dragged];
+                // const dragged_over = this.contents[this.over];
+                this.contents.splice(this.over, 0, dragged);
+                this.contents.splice(
+                    this.dragged + (this.over < this.dragged ? 1 : 0),
+                    1
+                );
+            }
+            this.fake.remove();
+            this.dragged = null;
+            this.dragging = false;
+        },
+        dragenter(idx, node) {},
+        dragleave(idx, node) {},
+        dragover(idx, node) {
+            if (node.getAttribute("dropzone") !== "move") {
+                return;
+            }
+            const rect = node.getBoundingClientRect();
+            if (rect.top + rect.height / 2 > event.clientY) {
+                node.parentNode.parentNode.insertBefore(
+                    this.fake,
+                    node.parentNode.nextSibling
+                );
+                this.over = idx + 1;
+            } else {
+                node.parentNode.parentNode.insertBefore(
+                    this.fake,
+                    node.parentNode.previousSibling
+                );
+                this.over = idx;
+            }
         },
     };
 }
