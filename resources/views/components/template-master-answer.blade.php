@@ -17,6 +17,7 @@
         <x-if-likert-grid-answer />
         <x-if-date-answer />
         <x-if-radio-grid-answer />
+        <x-if-drag-and-drop-ranking-answer />
         <hr class="mt-4">
     </div>
 </template>

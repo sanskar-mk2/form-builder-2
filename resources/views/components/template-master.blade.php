@@ -11,7 +11,7 @@
                 x-on:dragend.prevent="dragend($event)"
                 x-show="dragged !== index"
                 class="px-4 py-2 hover:cursor-move bg-base-300 card-actions items-center justify-between">
-                <h3 class="font-extrabold text-2xl text-secondary" x-text="`${index+1}. ${content.type.toUpperCase()}`"></h3>
+                <h3 class="font-extrabold text-2xl text-secondary" x-text="`${index+1}. ${content.type.replace(/_/g, ' ').toUpperCase()}`"></h3>
                 <x-remove x-on:click="remove(index)" />
             </div>
             <div x-show="!dragging" class="card-body">
@@ -39,6 +39,9 @@
                 </template>
                 <template x-if="content.type=='radio_grid'">
                     <x-template-radio-grid />
+                </template>
+                <template x-if="content.type=='drag_and_drop_ranking'">
+                    <x-template-drag-and-drop-ranking />
                 </template>
                 <x-checkbox x-model="content.required" label="Required" />
             </div>

@@ -33,5 +33,10 @@
         <li>
             <a x-on:click="add_radio_grid;add_dd=false;">Radio Grid</a>
         </li>
+        <li>
+            <a x-on:click="add_drag_and_drop_ranking;add_dd=false;">
+                Drag and Drop Ranking
+            </a>
+        </li>
     </ul>
 </div>

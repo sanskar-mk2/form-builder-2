@@ -1,4 +1,11 @@
 import validate from "./surveys-create-validate.js";
+import {
+    add_text,
+    add_checkbox,
+    add_description,
+    add_radio,
+    add_drag_and_drop_ranking,
+} from "./add_type";
 
 export default function handler(initial_content = []) {
     return {
@@ -9,39 +16,20 @@ export default function handler(initial_content = []) {
         over: null,
         error: "",
         contents: initial_content,
+        add_drag_and_drop_ranking() {
+            this.contents.push(_.cloneDeep(add_drag_and_drop_ranking));
+        },
         add_text() {
-            this.contents.push({
-                type: "text",
-                name: "",
-                label: "",
-                required: false,
-            });
+            this.contents.push(_.cloneDeep(add_text));
         },
         add_checkbox() {
-            this.contents.push({
-                type: "checkbox",
-                name: "",
-                label: "",
-                options: [],
-                required: false,
-            });
+            this.contents.push(_.cloneDeep(add_checkbox));
         },
         add_description() {
-            this.contents.push({
-                type: "description",
-                name: "",
-                label: "",
-                required: false,
-            });
+            this.contents.push(_.cloneDeep(add_description));
         },
         add_radio() {
-            this.contents.push({
-                type: "radio",
-                name: "",
-                label: "",
-                options: [],
-                required: false,
-            });
+            this.contents.push(_.cloneDeep(add_radio));
         },
         add_likert() {
             this.contents.push({

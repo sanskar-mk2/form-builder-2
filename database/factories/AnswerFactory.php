@@ -84,6 +84,12 @@ class AnswerFactory extends Factory
                 } else {
                     $contents[$content->name] = "";
                 }
+            } else if ($content->type === 'drag_and_drop_ranking') {
+                if ($content->required || rand(0, 1)) {
+                    $contents[$content->name] = $this->faker->shuffle(array_column($content->options, 'value'));
+                } else {
+                    $contents[$content->name] = [];
+                }
             }
         }
         return json_encode($contents);

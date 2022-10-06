@@ -15,18 +15,18 @@ export default function validate(contents) {
 
         // validate if all names are filled
         if (!self.name) {
-            return `Missing name at ${i + 1}. ${self.type.toUpperCase()}`;
+            return `Missing name at ${i + 1}. ${self.type.replace(/_/g, " ").toUpperCase()}`;
         }
 
         // validate if all labels are filled
         if (!self.label) {
-            return `Missing label at ${i + 1}. ${self.type.toUpperCase()}`;
+            return `Missing label at ${i + 1}. ${self.type.replace(/_/g, " ").toUpperCase()}`;
         }
 
         // validate date format is filled
         if (self.hasOwnProperty("format")) {
             if (!self.format) {
-                return `Missing format at ${i + 1}. ${self.type.toUpperCase()}`;
+                return `Missing format at ${i + 1}. ${self.type.replace(/_/g, " ").toUpperCase()}`;
             }
         }
 
@@ -35,7 +35,7 @@ export default function validate(contents) {
             if (self.options.length === 0) {
                 return `Missing options at ${
                     i + 1
-                }. ${self.type.toUpperCase()} | Please add at least one option`;
+                }. ${self.type.replace(/_/g, " ").toUpperCase()} | Please add at least one option`;
             }
 
             for (let j = 0; j < self.options.length; j++) {
@@ -45,14 +45,14 @@ export default function validate(contents) {
                 if (!selfop.value) {
                     return `Missing value at ${
                         i + 1
-                    }. ${self.type.toUpperCase()} - Option ${j + 1}`;
+                    }. ${self.type.replace(/_/g, " ").toUpperCase()} - Option ${j + 1}`;
                 }
 
                 // validate if all option's labels are filled
                 if (!selfop.option) {
                     return `Missing label at ${
                         i + 1
-                    }. ${self.type.toUpperCase()} - Option ${j + 1}`;
+                    }. ${self.type.replace(/_/g, " ").toUpperCase()} - Option ${j + 1}`;
                 }
             }
 
@@ -61,7 +61,7 @@ export default function validate(contents) {
             if (new Set(all_op_names).size !== all_op_names.length) {
                 return `Options must be unique at ${
                     i + 1
-                }. ${self.type.toUpperCase()}`;
+                }. ${self.type.replace(/_/g, " ").toUpperCase()}`;
             }
         }
 
@@ -71,7 +71,7 @@ export default function validate(contents) {
             if (self.questions.length === 0) {
                 return `Missing questions at ${
                     i + 1
-                }. ${self.type.toUpperCase()} | Please add at least one question`;
+                }. ${self.type.replace(/_/g, " ").toUpperCase()} | Please add at least one question`;
             }
 
             for (let j = 0; j < self.questions.length; j++) {
@@ -81,14 +81,14 @@ export default function validate(contents) {
                 if (!selfq.name) {
                     return `Missing name at ${
                         i + 1
-                    }. ${self.type.toUpperCase()} - Question ${j + 1}`;
+                    }. ${self.type.replace(/_/g, " ").toUpperCase()} - Question ${j + 1}`;
                 }
 
                 // validate if all questions's labels are filled
                 if (!selfq.label) {
                     return `Missing label at ${
                         i + 1
-                    }. ${self.type.toUpperCase()} - Question ${j + 1}`;
+                    }. ${self.type.replace(/_/g, " ").toUpperCase()} - Question ${j + 1}`;
                 }
             }
 
@@ -97,7 +97,7 @@ export default function validate(contents) {
             if (new Set(all_q_names).size !== all_q_names.length) {
                 return `Questions must be unique at ${
                     i + 1
-                }. ${self.type.toUpperCase()}`;
+                }. ${self.type.replace(/_/g, " ").toUpperCase()}`;
             }
         }
     }

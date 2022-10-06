@@ -5,9 +5,15 @@ dayjs.extend(customParseFormat);
 export default function answer_data(survey, initial_content = {}) {
     const contents = {};
     survey.forEach((content) => {
-        if (content.type === "checkbox") {
+        if (
+            content.type === "checkbox" ||
+            content.type === "drag_and_drop_ranking"
+        ) {
             contents[content.name] = initial_content[content.name] || [];
-        } else if (content.type === "likert_grid" || content.type === "radio_grid") {
+        } else if (
+            content.type === "likert_grid" ||
+            content.type === "radio_grid"
+        ) {
             contents[content.name] =
                 initial_content[content.name] ||
                 _.defaults(...content.questions.map((q) => ({ [q.name]: "" })));
@@ -40,8 +46,22 @@ export default function answer_data(survey, initial_content = {}) {
                     }
                 }
 
+                // check if all items ranked
+                if (self.type === "drag_and_drop_ranking") {
+                    if (
+                        this.contents[self.name].length &&
+                        this.contents[self.name].length !== self.options.length
+                    ) {
+                        console.log("Not all items ranked");
+                        return 1;
+                    }
+                }
+
                 // separate validation for likert_grid and radio_grid
-                if (self.required && (self.type === "likert_grid" || self.type === "radio_grid")) {
+                if (
+                    self.required &&
+                    (self.type === "likert_grid" || self.type === "radio_grid")
+                ) {
                     for (let j = 0; j < self.questions.length; j++) {
                         const q = self.questions[j];
                         if (this.contents[self.name][q.name] === "") {
