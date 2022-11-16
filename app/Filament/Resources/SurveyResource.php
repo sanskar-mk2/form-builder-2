@@ -4,11 +4,8 @@ namespace App\Filament\Resources;
 
 use App\Enums\SurveyStatus;
 use App\Filament\Resources\SurveyResource\Pages;
-use App\Filament\Resources\SurveyResource\RelationManagers;
 use App\Helpers\EnumHelper;
 use App\Models\Survey;
-use Filament\Forms;
-use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
@@ -16,9 +13,6 @@ use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class SurveyResource extends Resource
 {

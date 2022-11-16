@@ -18,6 +18,9 @@
         <x-if-date-answer />
         <x-if-radio-grid-answer />
         <x-if-drag-and-drop-ranking-answer />
+        <x-if-date-picker-answer />
+        <x-if-checkbox-grid-answer />
+        <x-if-slider-answer />
         <hr class="mt-4">
     </div>
 </template>

@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\AnswerController;
-use App\Http\Controllers\IndexController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\IndexController;
 use App\Http\Controllers\ResultController;
 use App\Http\Controllers\SurveyController;
 use Illuminate\Support\Facades\Route;

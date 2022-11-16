@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Survey;
 use App\Http\Requests\StoreSurveyRequest;
 use App\Http\Requests\UpdateSurveyRequest;
+use App\Models\Survey;
 
 class SurveyController extends Controller
 {
@@ -42,6 +42,7 @@ class SurveyController extends Controller
                 'contents' => $request->contents,
             ]
         );
+
         return redirect()->route('filament.resources.surveys.index');
     }
 

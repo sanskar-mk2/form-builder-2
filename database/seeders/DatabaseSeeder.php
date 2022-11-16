@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'sanskar',
             'email' => 'sanskar@localhost',
-            'role' => Role::SuperAdmin
+            'role' => Role::SuperAdmin,
         ]);
     }
 }

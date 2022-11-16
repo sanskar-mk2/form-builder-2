@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Helpers;
+
 use App\Models\User;
 
 class EnumHelper
@@ -30,7 +31,7 @@ class EnumHelper
     }
 }
 
-if (!function_exists('auther')) {
+if (! function_exists('auther')) {
     function auther(): User
     {
         return auth()->user();

@@ -12,6 +12,7 @@ class Survey extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'contents'];
+
     protected $appends = ['fields_count'];
 
     public function answers(): HasMany

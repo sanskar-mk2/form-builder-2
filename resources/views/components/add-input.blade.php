@@ -38,5 +38,14 @@
                 Drag and Drop Ranking
             </a>
         </li>
+        <li>
+            <a x-on:click="add_date_picker;add_dd=false;">Date Picker</a>
+        </li>
+        <li>
+            <a x-on:click="add_checkbox_grid;add_dd=false;">Checkbox Grid</a>
+        </li>
+        <li>
+            <a x-on:click="add_slider;add_dd=false;">Slider</a>
+        </li>
     </ul>
 </div>

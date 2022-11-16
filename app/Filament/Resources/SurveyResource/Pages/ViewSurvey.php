@@ -39,7 +39,7 @@ class ViewSurvey extends ViewRecord
         $this->record->save();
 
         Notification::make()
-            ->title('Published Survey: ' . $this->record->name)
+            ->title('Published Survey: '.$this->record->name)
             ->success()
             ->send();
         $this->redirect($this->getResource()::getUrl('index'));
@@ -51,7 +51,7 @@ class ViewSurvey extends ViewRecord
         $this->record->save();
 
         Notification::make()
-            ->title('Survey Marked Done: ' . $this->record->name)
+            ->title('Survey Marked Done: '.$this->record->name)
             ->success()
             ->send();
         $this->redirect($this->getResource()::getUrl('index'));

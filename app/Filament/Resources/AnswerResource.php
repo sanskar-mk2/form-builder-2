@@ -3,17 +3,13 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\AnswerResource\Pages;
-use App\Filament\Resources\AnswerResource\RelationManagers;
 use App\Models\Answer;
-use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class AnswerResource extends Resource
 {
@@ -51,14 +47,14 @@ class AnswerResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -67,5 +63,5 @@ class AnswerResource extends Resource
             'view' => Pages\ViewAnswer::route('/{record}'),
             'edit' => Pages\EditAnswer::route('/{record}/edit'),
         ];
-    }    
+    }
 }

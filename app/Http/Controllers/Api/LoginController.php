@@ -18,15 +18,15 @@ class LoginController extends Controller
     public function __invoke(Request $request)
     {
         $fields = $request->validate([
-            "email" => ["required"],
-            "password" => ["required"],
+            'email' => ['required'],
+            'password' => ['required'],
         ]);
 
         $user = User::whereEmail($fields['email'])->first();
 
-        if (!$user || !Hash::check($fields['password'], $user->password)) {
+        if (! $user || ! Hash::check($fields['password'], $user->password)) {
             return response([
-                'message' => 'wrong credentials'
+                'message' => 'wrong credentials',
             ], 401);
         }
 

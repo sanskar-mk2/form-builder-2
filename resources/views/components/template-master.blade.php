@@ -43,6 +43,15 @@
                 <template x-if="content.type=='drag_and_drop_ranking'">
                     <x-template-drag-and-drop-ranking />
                 </template>
+                <template x-if="content.type=='date_picker'">
+                    <x-template-date-picker />
+                </template>
+                <template x-if="content.type=='checkbox_grid'">
+                    <x-template-checkbox-grid />
+                </template>
+                <template x-if="content.type=='slider'">
+                    <x-template-slider />
+                </template>
                 <x-checkbox x-model="content.required" label="Required" />
             </div>
         </div>

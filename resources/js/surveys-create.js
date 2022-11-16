@@ -72,6 +72,31 @@ export default function handler(initial_content = []) {
                 required: false,
             });
         },
+        add_checkbox_grid() {
+            this.contents.push({
+                type: "checkbox_grid",
+                name: "",
+                label: "",
+                questions: [],
+                options: [],
+                required: false,
+            });
+        },
+        add_slider() {
+            this.contents.push({
+                type: "slider",
+                name: "",
+                label: "",
+                min: 0,
+                max: 10,
+                step: 1,
+                default: 5,
+                label_min: "",
+                label_max: "",
+                label_mid: "",
+                required: false,
+            });
+        },
         add_select() {
             this.contents.push({
                 type: "select",
@@ -88,6 +113,16 @@ export default function handler(initial_content = []) {
                 label: "",
                 required: false,
                 format: "YYYY-MM-DD",
+            });
+        },
+        add_date_picker() {
+            this.contents.push({
+                type: "date_picker",
+                name: "",
+                label: "",
+                min: "",
+                max: "",
+                required: false,
             });
         },
         add_question(index) {

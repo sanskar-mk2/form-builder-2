@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Answer;
 use App\Http\Requests\StoreAnswerRequest;
 use App\Http\Requests\UpdateAnswerRequest;
+use App\Models\Answer;
 use App\Models\Survey;
 use Illuminate\Http\Request;
 
@@ -28,9 +28,9 @@ class AnswerController extends Controller
     public function create(Request $request)
     {
         $survey = Survey::findOrFail($request->id);
+
         return view('answers.create', compact('survey'));
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -41,6 +41,7 @@ class AnswerController extends Controller
     public function store(StoreAnswerRequest $request)
     {
         $answer = Answer::create($request->validated());
+
         return redirect()->route('answers.show', $answer->id);
     }
 

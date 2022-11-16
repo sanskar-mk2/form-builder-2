@@ -1,9 +1,9 @@
 <?php
 
+use App\Http\Controllers\Api\AnswerController;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\LogoutController;
 use App\Http\Controllers\Api\SurveyController;
-use App\Http\Controllers\Api\AnswerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 

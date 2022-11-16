@@ -18,7 +18,7 @@ class LogoutController extends Controller
         auther()->tokens()->delete();
 
         return [
-            'message' => 'revoked all tokens'
+            'message' => 'revoked all tokens',
         ];
     }
 }

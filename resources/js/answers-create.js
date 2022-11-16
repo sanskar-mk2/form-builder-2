@@ -17,6 +17,13 @@ export default function answer_data(survey, initial_content = {}) {
             contents[content.name] =
                 initial_content[content.name] ||
                 _.defaults(...content.questions.map((q) => ({ [q.name]: "" })));
+        } else if (content.type === "checkbox_grid") {
+            contents[content.name] =
+                initial_content[content.name] ||
+                _.defaults(...content.questions.map((q) => ({ [q.name]: [] })));
+        } else if (content.type == "slider") {
+            contents[content.name] =
+                initial_content[content.name] || content.default;
         } else {
             contents[content.name] = initial_content[content.name] || "";
         }
@@ -69,6 +76,18 @@ export default function answer_data(survey, initial_content = {}) {
                             return 1;
                         }
                     }
+                } else if (self.required && self.type === "checkbox_grid") {
+                    for (let j = 0; j < self.questions.length; j++) {
+                        const q = self.questions[j];
+                        if (this.contents[self.name][q.name].length === 0) {
+                            console.log(
+                                "Required checkbox group field is empty"
+                            );
+                            return 1;
+                        }
+                    }
+                } else if (self.required && self.type === "slider") {
+                    // pass;
                 } else {
                     if (self.required && !this.contents[self.name].length) {
                         console.log("Required field is empty");
