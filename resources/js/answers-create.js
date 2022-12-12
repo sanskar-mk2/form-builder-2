@@ -12,7 +12,9 @@ export default function answer_data(survey, initial_content = {}) {
             contents[content.name] = initial_content[content.name] || [];
         } else if (
             content.type === "likert_grid" ||
-            content.type === "radio_grid"
+            content.type === "radio_grid" ||
+            content.type === "textbox_list" ||
+            content.type === "continuous_sum"
         ) {
             contents[content.name] =
                 initial_content[content.name] ||
@@ -34,6 +36,13 @@ export default function answer_data(survey, initial_content = {}) {
         contents: contents,
         readonly: false,
         disabled: false,
+        make_numeric(n) {
+            if (isNaN(n) || n === "") {
+                return 0;
+            } else {
+                return n;
+            }
+        },
         make_readonly() {
             this.readonly = true;
         },
@@ -67,7 +76,10 @@ export default function answer_data(survey, initial_content = {}) {
                 // separate validation for likert_grid and radio_grid
                 if (
                     self.required &&
-                    (self.type === "likert_grid" || self.type === "radio_grid")
+                    (self.type === "likert_grid" ||
+                        self.type === "radio_grid" ||
+                        self.type === "textbox_list" ||
+                        self.type === "continuous_sum")
                 ) {
                     for (let j = 0; j < self.questions.length; j++) {
                         const q = self.questions[j];

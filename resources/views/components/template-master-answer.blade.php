@@ -21,6 +21,8 @@
         <x-if-date-picker-answer />
         <x-if-checkbox-grid-answer />
         <x-if-slider-answer />
+        <x-if-textbox_list-answer />
+        <x-if-continuous-sum-answer />
         <hr class="mt-4">
     </div>
 </template>

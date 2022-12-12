@@ -52,6 +52,12 @@
                 <template x-if="content.type=='slider'">
                     <x-template-slider />
                 </template>
+                <template x-if="content.type=='textbox_list'">
+                    <x-template-textbox_list />
+                </template>
+                <template x-if="content.type=='continuous_sum'">
+                    <x-template-continuous-sum />
+                </template>
                 <x-checkbox x-model="content.required" label="Required" />
             </div>
         </div>

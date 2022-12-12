@@ -5,6 +5,8 @@ import {
     add_description,
     add_radio,
     add_drag_and_drop_ranking,
+    add_likert,
+    add_likert_grid,
 } from "./add_type";
 
 export default function handler(initial_content = []) {
@@ -32,35 +34,10 @@ export default function handler(initial_content = []) {
             this.contents.push(_.cloneDeep(add_radio));
         },
         add_likert() {
-            this.contents.push({
-                type: "likert",
-                name: "",
-                label: "",
-                options: [
-                    { option: "Very Dissatisfied", value: "very-dissatisfied" },
-                    { option: "Dissatisfied", value: "dissatisfied" },
-                    { option: "Neutral", value: "neutral" },
-                    { option: "Satisfied", value: "satisfied" },
-                    { option: "Very Satisfied", value: "very-satisfied" },
-                ],
-                required: false,
-            });
+            this.contents.push(_.cloneDeep(add_likert));
         },
         add_likert_grid() {
-            this.contents.push({
-                type: "likert_grid",
-                name: "",
-                label: "",
-                questions: [],
-                options: [
-                    { option: "Very Dissatisfied", value: "very-dissatisfied" },
-                    { option: "Dissatisfied", value: "dissatisfied" },
-                    { option: "Neutral", value: "neutral" },
-                    { option: "Satisfied", value: "satisfied" },
-                    { option: "Very Satisfied", value: "very-satisfied" },
-                ],
-                required: false,
-            });
+            this.contents.push(_.cloneDeep(add_likert_grid));
         },
         add_radio_grid() {
             this.contents.push({
@@ -122,6 +99,24 @@ export default function handler(initial_content = []) {
                 label: "",
                 min: "",
                 max: "",
+                required: false,
+            });
+        },
+        add_textbox_list() {
+            this.contents.push({
+                type: "textbox_list",
+                name: "",
+                label: "",
+                questions: [],
+                required: false,
+            });
+        },
+        add_continuous_sum() {
+            this.contents.push({
+                type: "continuous_sum",
+                name: "",
+                label: "",
+                questions: [],
                 required: false,
             });
         },

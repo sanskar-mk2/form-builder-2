@@ -47,5 +47,11 @@
         <li>
             <a x-on:click="add_slider;add_dd=false;">Slider</a>
         </li>
+        <li>
+            <a x-on:click="add_textbox_list;add_dd=false;">Textbox List</a>
+        </li>
+        <li>
+            <a x-on:click="add_continuous_sum;add_dd=false;">Continuous Sum</a>
+        </li>
     </ul>
 </div>
