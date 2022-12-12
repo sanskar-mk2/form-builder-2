@@ -120,6 +120,24 @@ export default function handler(initial_content = []) {
                 required: false,
             });
         },
+        add_image_multiselect() {
+            this.contents.push({
+                type: "image_multiselect",
+                name: "",
+                label: "",
+                options: [],
+                required: false,
+            });
+        },
+        add_image_singleselect() {
+            this.contents.push({
+                type: "image_singleselect",
+                name: "",
+                label: "",
+                options: [],
+                required: false,
+            });
+        },
         add_question(index) {
             this.contents[index].questions.push({ label: "", name: "" });
         },

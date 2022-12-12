@@ -53,5 +53,11 @@
         <li>
             <a x-on:click="add_continuous_sum;add_dd=false;">Continuous Sum</a>
         </li>
+        <li>
+            <a x-on:click="add_image_multiselect;add_dd=false;">Image Multiselect</a>
+        </li>
+        <li>
+            <a x-on:click="add_image_singleselect;add_dd=false;">Image Singleselect</a>
+        </li>
     </ul>
 </div>

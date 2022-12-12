@@ -7,7 +7,8 @@ export default function answer_data(survey, initial_content = {}) {
     survey.forEach((content) => {
         if (
             content.type === "checkbox" ||
-            content.type === "drag_and_drop_ranking"
+            content.type === "drag_and_drop_ranking" ||
+            content.type === "image_multiselect"
         ) {
             contents[content.name] = initial_content[content.name] || [];
         } else if (

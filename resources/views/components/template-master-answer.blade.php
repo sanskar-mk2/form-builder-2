@@ -23,6 +23,8 @@
         <x-if-slider-answer />
         <x-if-textbox_list-answer />
         <x-if-continuous-sum-answer />
+        <x-if-image-multiselect-answer />
+        <x-if-image-singleselect-answer />
         <hr class="mt-4">
     </div>
 </template>

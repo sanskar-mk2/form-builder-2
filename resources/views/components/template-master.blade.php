@@ -58,6 +58,12 @@
                 <template x-if="content.type=='continuous_sum'">
                     <x-template-continuous-sum />
                 </template>
+                <template x-if="content.type=='image_multiselect'">
+                    <x-template-image-multiselect />
+                </template>
+                <template x-if="content.type=='image_singleselect'">
+                    <x-template-image-singleselect />
+                </template>
                 <x-checkbox x-model="content.required" label="Required" />
             </div>
         </div>

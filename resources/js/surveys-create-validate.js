@@ -57,6 +57,12 @@ export default function validate(contents) {
                 isNumber(parseFloat(self.step)) &&
                 isNumber(parseFloat(self.default))
             ) {
+                // make sure it is min and max are 0 to 100 inclusive
+                if (self.min < 0 || self.min > 100) {
+                    return `Min must be between 0 and 100 at ${
+                        i + 1
+                    }. ${self.type.replace(/_/g, " ").toUpperCase()}`;
+                }
                 if (self.min >= self.max) {
                     return `Min must be less than max at ${i + 1}. ${self.type
                         .replace(/_/g, " ")

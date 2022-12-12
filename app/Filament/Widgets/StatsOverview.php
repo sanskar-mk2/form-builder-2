@@ -3,6 +3,7 @@
 namespace App\Filament\Widgets;
 
 use App\Models\Answer;
+use App\Models\Picture;
 use App\Models\Survey;
 use App\Models\User;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
@@ -19,6 +20,8 @@ class StatsOverview extends BaseWidget
                 ->url(route('filament.resources.surveys.index')),
             Card::make('Answers', Answer::count())
                 ->url(route('filament.resources.answers.index')),
+            Card::make('Pictures', Picture::count())
+                ->url(route('filament.resources.pictures.index')),
         ];
     }
 }
