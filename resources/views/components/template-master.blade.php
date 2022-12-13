@@ -15,7 +15,7 @@
                 <x-remove x-on:click="remove(index)" />
             </div>
             <div x-show="!dragging" class="card-body">
-                <input placeholder="name" readonly x-model="content.name" type="text" class="input input-bordered w-full max-w-xs" >
+                <input placeholder="name" x-show="0" readonly x-model="content.name" type="text" class="input input-bordered w-full max-w-xs" >
                 <template x-if="content.type=='text' || content.type=='description'">
                     <x-template-text />
                 </template>

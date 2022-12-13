@@ -10,7 +10,6 @@ export default function drag_and_drop_alpine() {
             this.dragging = true;
         },
         dragend: function (ev) {
-            console.log(this.belongs_to, this.over);
             if (ev.dataTransfer.dropEffect == "move") {
                 if (this.belongs_to == this.over) {
                     this.dragging = false;

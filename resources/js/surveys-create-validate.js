@@ -63,12 +63,20 @@ export default function validate(contents) {
                         i + 1
                     }. ${self.type.replace(/_/g, " ").toUpperCase()}`;
                 }
+                if (self.max < 0 || self.max > 100) {
+                    return `Max must be between 0 and 100 at ${
+                        i + 1
+                    }. ${self.type.replace(/_/g, " ").toUpperCase()}`;
+                }
                 if (self.min >= self.max) {
                     return `Min must be less than max at ${i + 1}. ${self.type
                         .replace(/_/g, " ")
                         .toUpperCase()}`;
                 }
-                if (self.default < self.min || self.default > self.max) {
+                if (
+                    Number(self.default) < Number(self.min) ||
+                    Number(self.default) > Number(self.max)
+                ) {
                     return `Default must be between min and max at ${
                         i + 1
                     }. ${self.type.replace(/_/g, " ").toUpperCase()}`;

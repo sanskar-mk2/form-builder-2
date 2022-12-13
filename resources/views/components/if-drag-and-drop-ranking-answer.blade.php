@@ -19,7 +19,7 @@
                                 class="py-2 px-8"
                                 :draggable="!contents[item.name].includes(option.value) ? 'true' : 'false'"
                                 x-on:dragstart.self="dragstart(op_index, $event.target, index);$event.dataTransfer.effectAllowed='move';"
-                                x-on:dragend.self="if (dragend($event)) { contents[item.name].push(option.value);console.log(contents) }"
+                                x-on:dragend.self="if (dragend($event)) { contents[item.name].push(option.value); }"
                                 x-model="option.value"
                                 x-text="option.option"
                             ></li>

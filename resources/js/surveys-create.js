@@ -151,7 +151,6 @@ export default function handler(initial_content = []) {
             this.contents[index].options.splice(op_index, 1);
         },
         remove(index) {
-            console.log(this.contents);
             this.contents.splice(index, 1);
         },
         validate() {

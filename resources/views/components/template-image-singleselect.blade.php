@@ -1,21 +1,14 @@
 <div class="flex flex-col gap-4">
-    <input placeholder="label" x-on:keyup="set_names" x-model="content.label" type="text" class="input input-bordered w-full max-w-xs" >
+    <x-part-label />
     <table class="table">
-        <thead>
-            <tr>
-                <th></th>
-                <th>Value</th>
-                <th>Label</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
+        <x-part-option-thead />
         <tbody>
             <template x-for="(option, op_index) in content.options" :key="`${index}.${op_index}`">
                 <tr>
                     <td x-text="op_index+1">
                         {{-- Index --}}
                     </td>
-                    <td>
+                    <td x-show="0">
                         <input placeholder="value" readonly x-model="option.value" type="text" class="input input-bordered w-full max-w-xs" >
                     </td>
                     <td>

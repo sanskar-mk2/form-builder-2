@@ -8,7 +8,7 @@
             <template x-for="(option, op_index) in item.options" :key="op_index">
                 <label class="label cursor-pointer w-fit">
                     <input :disabled="disabled||readonly" type="checkbox" x-model="contents[item.name]"
-                        :value="option.value" class="disabled:opacity-100 checkbox checkbox-primary" />
+                        :value="option.value" class="disabled:opacity-100 checkbox checked:bg-primary checkbox-primary" />
                     <span class="ml-1 label-text" x-text="option.option"></span> 
                 </label>
             </template>

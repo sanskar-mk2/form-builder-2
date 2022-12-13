@@ -4,7 +4,6 @@ import uniqolor from "uniqolor";
 
 const make_chart = (canvas_id, data) => {
     const count = _.countBy(data.answers);
-    console.log(count);
     const labels = Object.keys(count).map(
         (value) =>
             data.content.options.find((op) => op.value === value)?.option ??
@@ -31,7 +30,6 @@ const make_chart = (canvas_id, data) => {
 const alpine_pie = {
     make(id, content, answers) {
         const data = { content, answers };
-        console.log(data);
         make_chart(id, data);
     },
 };

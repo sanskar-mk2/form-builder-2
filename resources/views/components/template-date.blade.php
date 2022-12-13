@@ -1,6 +1,9 @@
 <div x-data="{toggle_help: false}" class="flex flex-col gap-4">
-    <input placeholder="label" x-on:keyup="set_names" x-model="content.label" type="text" class="input input-bordered w-full max-w-xs" >
-    <input placeholder="format" x-model="content.format" type="text" class="input input-bordered w-full max-w-xs" >
+    <x-part-label />
+    <label class="label">
+        <span class="label-text">Format</span>
+        <input placeholder="format" x-model="content.format" type="text" class="input input-bordered w-full max-w-xs ml-2" >
+    </label>
     <div class="form-control">
         <label class="label w-fit cursor-pointer">
             <input type="checkbox" class="toggle" x-model="toggle_help" />

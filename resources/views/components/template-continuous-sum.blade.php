@@ -1,32 +1,11 @@
 <div class="flex flex-col gap-4">
-    <input placeholder="label" x-on:keyup="set_names" x-model="content.label" type="text" class="input input-bordered w-full max-w-xs" >
+    <label>
+        <span class="label-text">Label</span>
+        <input placeholder="label" x-on:keyup="set_names" x-model="content.label" type="text" class="ml-2 input input-bordered w-full max-w-xs" >
+    </label>
     <table class="table">
-        <thead>
-            <tr>
-                <th></th>
-                <th>Name</th>
-                <th>Question</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <template x-for="(question, q_index) in content.questions" :key="`${index}.${q_index}`">
-                <tr>
-                    <td x-text="q_index+1">
-                        {{-- Index --}}
-                    </td>
-                    <td>
-                        <input placeholder="name" readonly x-model="question.name" type="text" class="input input-bordered w-full max-w-xs" >
-                    </td>
-                    <td>
-                        <input placeholder="label" x-on:keyup="question.name=slugify(question.label)" x-model="question.label" type="text" class="input input-bordered w-full max-w-xs" >
-                    </td>
-                    <td>
-                        <x-remove x-on:click="remove_question(index, q_index)" />
-                    </td>
-                </tr>
-            </template>
-        </tbody>
+        <x-part-question-thead />
+        <x-part-question-tbody />
     </table>
     <button x-on:click="add_question(index)"
         class="btn btn-primary w-32">

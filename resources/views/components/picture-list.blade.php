@@ -1,6 +1,6 @@
-<div class="flex items-center" x-data="{image:'', images: @js($pictures)}">
+<div class="flex gap-4 items-center" x-data="{image:'', images: @js($pictures)}">
     <select x-model="option.option"
-        class="input input-bordered w-full max-w-xs"
+        class="input input-bordered w-full"
         x-on:change="option.value=slugify(option.option)">
         <option value="">
             Select Picture
