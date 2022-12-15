@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
     {
         User::factory()->create([
             'name' => 'sanskar',
-            'email' => 'sanskar@localhost',
+            'email' => 'sanskar@localhost.com',
             'role' => Role::SuperAdmin,
         ]);
     }

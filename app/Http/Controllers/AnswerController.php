@@ -41,13 +41,14 @@ class AnswerController extends Controller
     public function store(StoreAnswerRequest $request)
     {
         $answer = Answer::create($request->validated());
-
+        // insert ip
+        $answer->ip()->create(['ip' => $request->ip()]);
         return redirect()->route('answers.show', $answer->id);
     }
 
     /**
      * Display the specified resource.
-     *
+     *s
      * @param  \App\Models\Answer  $answer
      * @return \Illuminate\Http\Response
      */

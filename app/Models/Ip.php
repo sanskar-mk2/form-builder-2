@@ -5,21 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Picture extends Model
+class Ip extends Model
 {
     use HasFactory;
 
-    protected $appends = [
-        'url',
-    ];
-
     protected $fillable = [
-        'name',
-        'path',
+        'answer_id',
+        'ip',
     ];
 
-    public function getUrlAttribute()
+    public function answer()
     {
-        return asset('storage/'.$this->path);
+        return $this->belongsTo(Answer::class);
     }
 }

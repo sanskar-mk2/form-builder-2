@@ -7,6 +7,8 @@ use App\Filament\Resources\SurveyResource;
 use Filament\Notifications\Notification;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\ViewRecord;
+use App\Exports\SurveyExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ViewSurvey extends ViewRecord
 {
@@ -27,6 +29,10 @@ class ViewSurvey extends ViewRecord
                 ->requiresConfirmation();
         } else;
 
+        $ret[] = Actions\Action::make('export_to_excel')
+            ->action('export_to_excel')
+            ->requiresConfirmation();
+
         return [
             Actions\EditAction::make(),
             ...$ret,
@@ -39,10 +45,16 @@ class ViewSurvey extends ViewRecord
         $this->record->save();
 
         Notification::make()
-            ->title('Published Survey: '.$this->record->name)
+            ->title('Published Survey: ' . $this->record->name)
             ->success()
             ->send();
         $this->redirect($this->getResource()::getUrl('index'));
+    }
+
+    public function export_to_excel()
+    {
+        $export  = new SurveyExport($this->record);
+        return Excel::download($export, "{$this->record->id}-{$this->record->name}.xlsx");
     }
 
     public function mark_completed()
@@ -51,7 +63,7 @@ class ViewSurvey extends ViewRecord
         $this->record->save();
 
         Notification::make()
-            ->title('Survey Marked Done: '.$this->record->name)
+            ->title('Survey Marked Done: ' . $this->record->name)
             ->success()
             ->send();
         $this->redirect($this->getResource()::getUrl('index'));

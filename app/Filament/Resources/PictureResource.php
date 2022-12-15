@@ -3,15 +3,12 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\PictureResource\Pages;
-use App\Filament\Resources\PictureResource\RelationManagers;
 use App\Models\Picture;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class PictureResource extends Resource
 {
@@ -30,7 +27,7 @@ class PictureResource extends Resource
                     ->label('Picture')
                     ->required()
                     ->directory('pictures')
-                    ->acceptedFileTypes(['image/*'])
+                    ->acceptedFileTypes(['image/*']),
             ]);
     }
 
@@ -47,7 +44,7 @@ class PictureResource extends Resource
                     ->searchable(),
                 Tables\Columns\ImageColumn::make('path')
                     ->label('Picture')
-                    ->size(200)
+                    ->size(200),
             ])
             ->filters([
                 //

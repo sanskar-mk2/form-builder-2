@@ -8,6 +8,7 @@ use Illuminate\View\Component;
 class PictureList extends Component
 {
     public $pictures;
+
     /**
      * Create a new component instance.
      *

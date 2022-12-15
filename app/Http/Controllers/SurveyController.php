@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreSurveyRequest;
 use App\Http\Requests\UpdateSurveyRequest;
 use App\Models\Survey;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SurveyController extends Controller
 {
@@ -81,6 +82,7 @@ class SurveyController extends Controller
         $survey->name = $request->name;
         $survey->contents = $request->contents;
         $survey->save();
+        return view('surveys.show', compact('survey'));
     }
 
     /**

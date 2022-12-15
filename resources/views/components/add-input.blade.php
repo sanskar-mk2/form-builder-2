@@ -18,9 +18,10 @@
         <li>
             <a x-on:click="add_continuous_sum;add_dd=false;">Continuous Sum</a>
         </li>
-        <li>
+        {{-- Date is not required by client. They need datepicker --}}
+        {{-- <li>
             <a x-on:click="add_date;add_dd=false;">Date</a>
-        </li>
+        </li> --}}
     </ul>
 </div>
 

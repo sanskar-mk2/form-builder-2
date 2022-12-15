@@ -35,12 +35,18 @@ class AnswerResource extends Resource
                     ->getStateUsing(fn (Model $record) => $record->survey->name),
                 TextColumn::make('created_at'),
                 TextColumn::make('updated_at'),
+                TextColumn::make('ip.ip'),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
+                Tables\Actions\Action::make('view')
+                    ->label('View')
+                    ->icon('heroicon-o-eye')
+                    ->url(fn (Model $record): string => route('answers.show', $record))
+                    ->openUrlInNewTab(),
+
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
