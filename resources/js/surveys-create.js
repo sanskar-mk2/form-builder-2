@@ -7,6 +7,7 @@ import {
     add_drag_and_drop_ranking,
     add_likert,
     add_likert_grid,
+    add_slider_list,
 } from "./add_type";
 
 export default function handler(initial_content = []) {
@@ -138,6 +139,14 @@ export default function handler(initial_content = []) {
                 required: false,
             });
         },
+        add_slider_list() {
+            this.contents.push(_.cloneDeep(add_slider_list));
+        },
+        add_page_break() {
+            this.contents.push({
+                type: "page_break",
+            });
+        },
         add_question(index) {
             this.contents[index].questions.push({ label: "", name: "" });
         },
@@ -158,6 +167,7 @@ export default function handler(initial_content = []) {
         },
         set_names() {
             for (let i = 0; i < this.contents.length; i++) {
+                if (this.contents[i].type === "page_break") continue;
                 const self = this.contents[i];
                 self.name = this.slugify(self.label);
             }

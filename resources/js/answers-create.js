@@ -4,6 +4,7 @@ dayjs.extend(customParseFormat);
 
 export default function answer_data(survey, initial_content = {}) {
     const contents = {};
+    const pages = [[]];
     survey.forEach((content) => {
         if (
             content.type === "checkbox" ||
@@ -27,13 +28,29 @@ export default function answer_data(survey, initial_content = {}) {
         } else if (content.type == "slider") {
             contents[content.name] =
                 initial_content[content.name] || content.default;
+        } else if (content.type == "slider_list") {
+            contents[content.name] =
+                initial_content[content.name] ||
+                _.defaults(
+                    ...content.questions.map((q) => ({
+                        [q.name]: content.default,
+                    }))
+                );
+        } else if (content.type == "page_break") {
+            pages.push([]);
         } else {
             contents[content.name] = initial_content[content.name] || "";
         }
+        // just push name to pages
+        if (content.type !== "page_break")
+            pages[pages.length - 1].push(content.name);
     });
+    // pop last page if empty
+    if (pages[pages.length - 1].length === 0) pages.pop();
 
     return {
         survey: survey,
+        pages: pages,
         contents: contents,
         readonly: false,
         disabled: false,
@@ -80,6 +97,7 @@ export default function answer_data(survey, initial_content = {}) {
                     (self.type === "likert_grid" ||
                         self.type === "radio_grid" ||
                         self.type === "textbox_list" ||
+                        self.type === "slider_list" ||
                         self.type === "continuous_sum")
                 ) {
                     for (let j = 0; j < self.questions.length; j++) {

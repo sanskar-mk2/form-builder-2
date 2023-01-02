@@ -7,13 +7,18 @@ export default function validate(contents) {
     }
 
     // validate if all labels and thus names are unique
-    const all_names = contents.map((content) => content.name);
+    const no_page_breaks = contents.filter((content) => content.type !== "page_break");
+    const all_names = no_page_breaks.map((content) => content.name);
     if (new Set(all_names).size !== all_names.length) {
         return "Name must be unique";
     }
 
     for (let i = 0; i < contents.length; i++) {
         const self = contents[i];
+
+        if (self.type === "page_break") {
+            continue;
+        }
 
         // validate if all names are filled
         if (!self.name) {

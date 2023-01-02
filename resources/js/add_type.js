@@ -65,6 +65,21 @@ const add_likert_grid = {
     required: false,
 };
 
+const add_slider_list = {
+    type: "slider_list",
+    name: "",
+    label: "",
+    min: 0,
+    max: 10,
+    step: 1,
+    default: 5,
+    label_min: "",
+    label_max: "",
+    label_mid: "",
+    required: false,
+    questions: [],
+};
+
 export {
     add_text,
     add_checkbox,
@@ -73,4 +88,5 @@ export {
     add_drag_and_drop_ranking,
     add_likert,
     add_likert_grid,
+    add_slider_list,
 };

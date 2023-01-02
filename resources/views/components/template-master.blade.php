@@ -64,7 +64,17 @@
                 <template x-if="content.type=='image_singleselect'">
                     <x-template-image-singleselect />
                 </template>
-                <x-checkbox x-model="content.required" label="Required" />
+                <template x-if="content.type=='slider_list'">
+                    <x-template-slider-list />
+                </template>
+                <template x-if="!content.type=='page_break'">
+                    <x-checkbox x-model="content.required" label="Required" />
+                </template>
+                <template x-if="content.type=='page_break'">
+                    <p>
+                        Following questions will be on next page
+                    </p>
+                </template>
             </div>
         </div>
     </div>
