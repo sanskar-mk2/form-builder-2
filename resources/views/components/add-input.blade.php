@@ -1,5 +1,5 @@
 <div class="flex items-center">
-    <div x-bind:class="add_dd ? 'pb-96' : 'pb-32'" class="dropdown">
+    <div x-bind:class="add_dd ? 'pb-96' : 'pb-4'" class="dropdown">
         <label x-on:click="add_dd=true"
             tabindex="0" class="btn m-1 w-24">
             Add Text
@@ -26,7 +26,7 @@
         </ul>
     </div>
 
-    <div x-bind:class="add_dd ? 'pb-96' : 'pb-32'" class="dropdown">
+    <div x-bind:class="add_dd ? 'pb-96' : 'pb-4'" class="dropdown">
         <label x-on:click="add_dd=true"
             tabindex="0" class="btn m-1 w-24">
             Add Choice
@@ -72,7 +72,7 @@
         </ul>
     </div>
 
-    <div x-bind:class="add_dd ? 'pb-96' : 'pb-32'" class="dropdown">
+    <div x-bind:class="add_dd ? 'pb-96' : 'pb-4'" class="dropdown">
         <label x-on:click="add_dd=true"
             tabindex="0" class="btn m-1 w-24">
             Add Image
@@ -89,7 +89,7 @@
         </ul>
     </div>
 
-    <div x-bind:class="add_dd ? 'pb-96' : 'pb-32'" class="dropdown">
+    <div x-bind:class="add_dd ? 'pb-96' : 'pb-4'" class="dropdown">
         <label x-on:click="add_dd=true"
             tabindex="0" class="btn m-1 w-24">
             Misc.

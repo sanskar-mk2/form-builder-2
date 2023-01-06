@@ -49,6 +49,7 @@ export default function answer_data(survey, initial_content = {}) {
     if (pages[pages.length - 1].length === 0) pages.pop();
 
     return {
+        current_page: 0,
         survey: survey,
         pages: pages,
         contents: contents,
