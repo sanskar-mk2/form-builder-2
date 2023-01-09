@@ -63,7 +63,7 @@ class AnswerFactory extends Factory
                 } else {
                     $contents[$content->name] = '';
                 }
-            } elseif ($content->type == 'checkbox') {
+            } elseif ($content->type == 'checkbox' || $content->type == 'image_multiselect') {
                 if ($content->required || rand(0, 1)) {
                     $contents[$content->name] = $this->faker->randomElements(array_column($content->options, 'value'), rand(1, count($content->options)));
                 } else {
@@ -83,11 +83,25 @@ class AnswerFactory extends Factory
                 } else {
                     $contents[$content->name] = '';
                 }
+            } elseif ($content->type == 'date_picker') {
+                if ($content->required || rand(0, 1)) {
+                    $contents[$content->name] = $this->faker->dateTimeBetween($content->min, $content->max)->format('Y-m-d');
+                } else {
+                    $contents[$content->name] = '';
+                }
             } elseif ($content->type === 'drag_and_drop_ranking') {
                 if ($content->required || rand(0, 1)) {
                     $contents[$content->name] = $this->faker->shuffle(array_column($content->options, 'value'));
                 } else {
                     $contents[$content->name] = [];
+                }
+            } elseif ($content->type === 'slider') {
+                if ($content->required || rand(0, 1)) {
+                    $randomNumber = mt_rand($content->min, $content->max - $content->step);
+                    $randomNumber = $randomNumber - ($randomNumber % $content->step) + $content->step;
+                    $contents[$content->name] = $randomNumber;
+                } else {
+                    $contents[$content->name] = $content->default;
                 }
             }
         }

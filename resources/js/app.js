@@ -2,6 +2,8 @@ import "./bootstrap";
 import Alpine from "alpinejs";
 import { alpine_pie } from "./radio-pie-chart";
 import { alpine_bar } from "./radio-bar-chart";
+import { alpine_checkbox_bar } from "./checkbox-bar-chart";
+import { alpine_date_line } from "./date-line-chart";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 dayjs.extend(customParseFormat);
@@ -21,9 +23,10 @@ window.drag_and_drop_alpine = drag_and_drop_alpine;
 document.addEventListener("alpine:init", () => {
     Alpine.data("alpine_pie", () => ({ ...alpine_pie }));
     Alpine.data("alpine_bar", () => ({ ...alpine_bar }));
+    Alpine.data("alpine_checkbox_bar", () => ({ ...alpine_checkbox_bar }));
+    Alpine.data("alpine_date_line", () => ({ ...alpine_date_line }));
 });
-window.alpine_pie = alpine_pie;
-window.alpine_bar = alpine_bar;
+
 Alpine.start();
 
 import { themeChange } from "theme-change";
