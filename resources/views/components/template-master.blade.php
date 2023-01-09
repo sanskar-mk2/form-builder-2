@@ -67,7 +67,7 @@
                 <template x-if="content.type=='slider_list'">
                     <x-template-slider-list />
                 </template>
-                <template x-if="!content.type=='page_break'">
+                <template x-if="content.type!='page_break'">
                     <x-checkbox x-model="content.required" label="Required" />
                 </template>
                 <template x-if="content.type=='page_break'">

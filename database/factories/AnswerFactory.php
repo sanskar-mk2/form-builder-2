@@ -55,7 +55,8 @@ class AnswerFactory extends Factory
             } elseif (
                 $content->type == 'select' ||
                 $content->type == 'radio' ||
-                $content->type == 'likert'
+                $content->type == 'likert' ||
+                $content->type == 'image_singleselect'
             ) {
                 if ($content->required || rand(0, 1)) {
                     $contents[$content->name] = $this->faker->randomElement(array_column($content->options, 'value'));
