@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\SurveyStatus;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -18,6 +19,12 @@ class Survey extends Model
     public function answers(): HasMany
     {
         return $this->hasMany(Answer::class);
+    }
+
+    // scope published
+    public function scopePublished($query)
+    {
+        return $query->where('status', SurveyStatus::Published->value);
     }
 
     protected function contents(): Attribute

@@ -6,7 +6,7 @@
                 @include('charts.radio-bar', ['index' => 1, 'content' => $content, 'answers' => $survey->answers->pluck('contents')->pluck($content->name)])
             @elseif($content->type == 'checkbox' || $content->type == 'image_multiselect')
                 @include('charts.checkbox-bar', ['index' => 0, 'content' => $content, 'answers' => $survey->answers->pluck('contents')->pluck($content->name)])
-            @elseif($content->type == 'date_picker')
+            @elseif($content->type == 'date_picker' || $content->type == 'slider')
                 @include('charts.date-line', ['index' => 0, 'content' => $content, 'answers' => $survey->answers->pluck('contents')->pluck($content->name)])
             @endif
         @endforeach

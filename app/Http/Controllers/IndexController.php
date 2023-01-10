@@ -14,6 +14,11 @@ class IndexController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return view('index');
+        // return view('index');
+        if (auth()->check()) {
+            return redirect()->route('surveys.index');
+        } else {
+            return redirect()->route('login');
+        }
     }
 }

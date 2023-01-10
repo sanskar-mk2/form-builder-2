@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\SurveyStatus;
 use App\Http\Requests\StoreAnswerRequest;
 use App\Http\Requests\UpdateAnswerRequest;
 use App\Models\Answer;
 use App\Models\Survey;
 use Illuminate\Http\Request;
+use App\Helpers\UrlHelper;
 
 class AnswerController extends Controller
 {
@@ -27,7 +29,27 @@ class AnswerController extends Controller
      */
     public function create(Request $request)
     {
-        $survey = Survey::findOrFail($request->id);
+        $surveys = Survey::all()->pluck('id');
+        // map bcrypt all ids
+        $surveys = $surveys->map(function ($item) {
+            return UrlHelper::urlSafeHashMake($item);
+        });
+
+        // check if id is in surveys
+        if (!$surveys->contains($request->id)) {
+            abort(404);
+        }
+
+        // get id
+        $id = UrlHelper::urlSafeHashDecode($request->id);
+
+        // check if survey is active
+        if (Survey::findOrFail($id)->status != SurveyStatus::Published->value) {
+            abort(404);
+        }
+
+        // get survey
+        $survey = Survey::findOrFail($id);
 
         return view('answers.create', compact('survey'));
     }

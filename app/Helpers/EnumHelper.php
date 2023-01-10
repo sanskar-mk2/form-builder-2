@@ -31,9 +31,33 @@ class EnumHelper
     }
 }
 
-if (! function_exists('auther')) {
+if (!function_exists('auther')) {
     function auther(): User
     {
         return auth()->user();
+    }
+}
+
+if (!function_exists('urlSafeHashMake')) {
+    /**
+     * Generate a hashed string that is URL save
+     * @param  string $string The string to hash
+     * @return string         Hashed string
+     */
+    function urlSafeHashMake($string)
+    {
+        return strtr(base64_encode($string), '+/=', '-_,');
+    }
+}
+
+if (!function_exists('urlSafeHashDecode')) {
+    /**
+     * Decode a URL safe hash string
+     * @param  string $string The string to decipher
+     * @return string         The deciphered string
+     */
+    function urlSafeHashDecode($string)
+    {
+        return base64_decode(strtr($string, '-_,', '+/='));
     }
 }

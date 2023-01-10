@@ -1,4 +1,5 @@
 <x-base-layout>
+    <h2 class="text-3xl pt-8 text-center">Published Surveys</h2>
     <section class="my-8 flex flex-wrap gap-8 justify-center">
         @foreach ($surveys as $survey)
         <div class="card w-96 bg-base-100 shadow-xl image-full">
@@ -11,7 +12,7 @@
                 <p>Questions: {{ $survey->fields_count }}</p>
                 <p>Responses: {{ $survey->answers->count() }}</p>
                 <div class="card-actions justify-end">
-                    <a href="{{ route('answers.create', ['id' => $survey->id]) }}">
+                    <a href="{{ route('answers.create', ['id' => \App\Helpers\UrlHelper::urlSafeHashMake($survey->id)]) }}">
                         <button class="btn btn-primary">Answer Now</button>
                     </a>
                 </div>
