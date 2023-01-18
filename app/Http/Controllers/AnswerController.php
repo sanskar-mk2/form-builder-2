@@ -65,7 +65,8 @@ class AnswerController extends Controller
         $answer = Answer::create($request->validated());
         // insert ip
         $answer->ip()->create(['ip' => $request->ip()]);
-        return redirect()->route('answers.show', $answer->id);
+        return view('thanks');
+        // return redirect()->route('answers.show', $answer->id);
     }
 
     /**
@@ -76,6 +77,9 @@ class AnswerController extends Controller
      */
     public function show(Answer $answer)
     {
+        if (!auth()->check()) {
+            abort(404);
+        }
         return view('answers.show', compact('answer'));
     }
 
@@ -87,7 +91,8 @@ class AnswerController extends Controller
      */
     public function edit(Answer $answer)
     {
-        return view('answers.edit', compact('answer'));
+        abort(404);
+        // return view('answers.edit', compact('answer'));
     }
 
     /**
