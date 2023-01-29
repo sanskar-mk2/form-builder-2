@@ -1,4 +1,7 @@
 import "./bootstrap";
+
+import.meta.glob(["../images/**"]);
+
 import Alpine from "alpinejs";
 import { alpine_pie } from "./radio-pie-chart";
 import { alpine_bar } from "./radio-bar-chart";
