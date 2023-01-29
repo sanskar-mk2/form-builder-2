@@ -39,7 +39,7 @@ class SurveyController extends Controller
      */
     public function show(Survey $survey)
     {
-        return new SurveyResource($survey);
+        return SurveyResource::make($survey)->toArray(null);
     }
 
     /**

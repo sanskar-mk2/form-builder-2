@@ -14,7 +14,7 @@ class Survey extends Model
 
     protected $fillable = ['name', 'contents'];
 
-    protected $appends = ['fields_count'];
+    protected $appends = ['fields_count', 'assets'];
 
     public function answers(): HasMany
     {
@@ -38,6 +38,33 @@ class Survey extends Model
     {
         return new Attribute(
             get: fn () => count($this->contents),
+        );
+    }
+
+    protected function assets(): Attribute
+    {
+        return new Attribute(
+            get: function () {
+                $to_pluck = [];
+
+                foreach ($this->contents as $field) {
+                    if (
+                        $field->type === 'image_singleselect' ||
+                        $field->type === 'image_multiselect'
+                    ) {
+                        foreach ($field->options as $option) {
+                            $to_pluck[] = $option->value;
+                        }
+                    }
+                }
+                $assets = [];
+                $pics = Picture::whereIn('id', $to_pluck)->get();
+                foreach ($pics as $pic) {
+                    $assets["$pic->id"] = $pic->url;
+                }
+
+                return $assets;
+            }
         );
     }
 }
