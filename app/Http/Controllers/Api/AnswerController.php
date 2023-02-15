@@ -7,6 +7,7 @@ use App\Http\Resources\AnswerCollection;
 use App\Models\Answer;
 use App\Models\Survey;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class AnswerController extends Controller
 {
@@ -246,5 +247,76 @@ class AnswerController extends Controller
     public function destroy(Answer $answer)
     {
         //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function mobileAnswer(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'survey_id' => 'required|exists:surveys,id',
+            'data' => 'required|array',
+        ]);
+        if ($validator->failed()) {
+            return response()->json([
+                'status' => false,
+                'message' => $validator->messages()->first(),
+                'data' => $validator->messages()
+            ], 422);
+        }
+        $validatorType = Validator::make($request->data, [
+            '*.type' => 'required|in:text,description,select,radio,likert,image_singleselect,checkbox,image_multiselect,continuous_sum,textbox_list,radio_grid,likert_grid,drag_and_drop_ranking,date_picker,checkbox_grid,slider',
+        ]);
+        if ($validatorType->failed()) {
+            return response()->json([
+                'status' => false,
+                'message' => $validatorType->messages()->first(),
+                'data' => $validatorType->messages()
+            ], 422);
+        }
+        $data = (object) collect($request->data)->mapWithKeys(function ($value,$key){
+           if (array_key_exists('answer',$value)){
+               if ($value['type']==="textbox_list"){
+                   $option = (object) collect($value['answer'])->mapWithKeys(function ($v,$k){
+                       if (array_key_exists('answer',$v)){
+                           return [
+                               $v['name'] => $v['answer']
+                           ];
+                       }
+                       return [
+                           $v['name'] => null
+                       ];
+                   });
+                   return [
+                       $value['name'] => (object)collect($option)->filter(function($value, $key) {
+                           return  $value != null;
+                       })->toArray()
+                   ];
+               }
+               return [
+                   $value['name'] => $value['answer']
+               ];
+           }
+           return [
+               $value['name'] => null
+           ];
+        })->toArray();
+        $filter = (object)collect($data)->filter(function($value, $key) {
+            return  $value != null;
+        })->toArray();
+        $survey = Survey::find($request->survey_id);
+        $answer = $survey->answers()->create([
+            'survey_id' => $survey->id,
+            'contents' => json_encode($filter),
+        ]);
+        $answer->ip()->create(['ip' => $request->ip()]);
+        return response()->json([
+            'message' => 'success',
+            'data' => $answer,
+        ]);
     }
 }
