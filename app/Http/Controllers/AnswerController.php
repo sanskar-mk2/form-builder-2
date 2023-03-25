@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Enums\SurveyStatus;
+use App\Helpers\UrlHelper;
 use App\Http\Requests\StoreAnswerRequest;
 use App\Http\Requests\UpdateAnswerRequest;
 use App\Models\Answer;
 use App\Models\Survey;
 use Illuminate\Http\Request;
-use App\Helpers\UrlHelper;
 
 class AnswerController extends Controller
 {
@@ -36,7 +36,7 @@ class AnswerController extends Controller
         });
 
         // check if id is in surveys
-        if (!$surveys->contains($request->id)) {
+        if (! $surveys->contains($request->id)) {
             abort(404);
         }
 
@@ -65,6 +65,7 @@ class AnswerController extends Controller
         $answer = Answer::create($request->validated());
         // insert ip
         $answer->ip()->create(['ip' => $request->ip()]);
+
         return view('thanks');
         // return redirect()->route('answers.show', $answer->id);
     }
@@ -72,14 +73,16 @@ class AnswerController extends Controller
     /**
      * Display the specified resource.
      *s
+     *
      * @param  \App\Models\Answer  $answer
      * @return \Illuminate\Http\Response
      */
     public function show(Answer $answer)
     {
-        if (!auth()->check()) {
+        if (! auth()->check()) {
             abort(404);
         }
+
         return view('answers.show', compact('answer'));
     }
 

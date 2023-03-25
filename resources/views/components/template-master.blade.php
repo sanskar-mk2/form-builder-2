@@ -68,7 +68,16 @@
                     <x-template-slider-list />
                 </template>
                 <template x-if="content.type!='page_break'">
-                    <x-checkbox x-model="content.required" label="Required" />
+                    <div>
+                        <div class="flex gap-8 items-center">
+                            <x-checkbox x-model="content.required" label="Required" />
+                            <button x-on:click="add_logic(index)"
+                                class="btn btn-primary w-32">
+                                Add Logic
+                            </button>
+                        </div>
+                        <x-logics class="mt-4" x-show="content.logics.length" />
+                    </div>
                 </template>
                 <template x-if="content.type=='page_break'">
                     <p>

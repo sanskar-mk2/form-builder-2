@@ -51,6 +51,17 @@ export default function answer_data(survey, initial_content = {}) {
     return {
         current_page: 0,
         survey: survey,
+        compute_logic(item) {
+            for (let i = 0; i < item.logics.length; i++) {
+                const logic = item.logics[i];
+                if (logic.type === "skip") {
+                    if (this.contents[logic.name] === logic.value) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        },
         pages: pages,
         contents: contents,
         readonly: false,
@@ -122,6 +133,8 @@ export default function answer_data(survey, initial_content = {}) {
                     // pass;
                 } else {
                     if (self.required && !this.contents[self.name].length) {
+                        // if logic hides this field, it is not required
+                        if (!this.compute_logic(self)) continue;
                         console.log("Required field is empty");
                         return 1;
                     }

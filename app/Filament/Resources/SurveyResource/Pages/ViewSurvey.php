@@ -3,11 +3,11 @@
 namespace App\Filament\Resources\SurveyResource\Pages;
 
 use App\Enums\SurveyStatus;
+use App\Exports\SurveyExport;
 use App\Filament\Resources\SurveyResource;
 use Filament\Notifications\Notification;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\ViewRecord;
-use App\Exports\SurveyExport;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ViewSurvey extends ViewRecord
@@ -45,7 +45,7 @@ class ViewSurvey extends ViewRecord
         $this->record->save();
 
         Notification::make()
-            ->title('Published Survey: ' . $this->record->name)
+            ->title('Published Survey: '.$this->record->name)
             ->success()
             ->send();
         $this->redirect($this->getResource()::getUrl('index'));
@@ -53,7 +53,8 @@ class ViewSurvey extends ViewRecord
 
     public function export_to_excel()
     {
-        $export  = new SurveyExport($this->record);
+        $export = new SurveyExport($this->record);
+
         return Excel::download($export, "{$this->record->id}-{$this->record->name}.xlsx");
     }
 
@@ -63,7 +64,7 @@ class ViewSurvey extends ViewRecord
         $this->record->save();
 
         Notification::make()
-            ->title('Survey Marked Done: ' . $this->record->name)
+            ->title('Survey Marked Done: '.$this->record->name)
             ->success()
             ->send();
         $this->redirect($this->getResource()::getUrl('index'));

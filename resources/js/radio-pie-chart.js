@@ -15,10 +15,12 @@ const make_chart = (canvas_id, data, pics) => {
     const keys = [];
     const values = [];
 
-    Object.entries(count).sort(([, a], [, b]) => b - a).forEach(([key, value]) => {
-        keys.push(key);
-        values.push(value);
-    });
+    Object.entries(count)
+        .sort(([, a], [, b]) => b - a)
+        .forEach(([key, value]) => {
+            keys.push(key);
+            values.push(value);
+        });
 
     const labels = keys.map(
         (value) =>
@@ -32,8 +34,6 @@ const make_chart = (canvas_id, data, pics) => {
             labels[index] = pics[label] ?? label;
         });
     }
-
-
 
     const chart = new Chart(ctx, {
         type: "pie",

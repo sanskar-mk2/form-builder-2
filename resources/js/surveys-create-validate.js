@@ -7,7 +7,9 @@ export default function validate(contents) {
     }
 
     // validate if all labels and thus names are unique
-    const no_page_breaks = contents.filter((content) => content.type !== "page_break");
+    const no_page_breaks = contents.filter(
+        (content) => content.type !== "page_break"
+    );
     const all_names = no_page_breaks.map((content) => content.name);
     if (new Set(all_names).size !== all_names.length) {
         return "Name must be unique";
@@ -95,6 +97,19 @@ export default function validate(contents) {
                 return `Min, max, step, and default must be numbers at ${
                     i + 1
                 }. ${self.type.replace(/_/g, " ").toUpperCase()}`;
+            }
+        }
+
+        // make sure all logics are filled
+        if (self.logics) {
+            // all logics should have a non-empty type, name, and value
+            for (let j = 0; j < self.logics.length; j++) {
+                const logic = self.logics[j];
+                if (!logic.type || !logic.name || !logic.value) {
+                    return `Missing logic at ${i + 1}. ${self.type
+                        .replace(/_/g, " ")
+                        .toUpperCase()} - Logic ${j + 1}`;
+                }
             }
         }
 

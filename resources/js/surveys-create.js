@@ -8,6 +8,16 @@ import {
     add_likert,
     add_likert_grid,
     add_slider_list,
+    add_radio_grid,
+    add_checkbox_grid,
+    add_slider,
+    add_select,
+    add_date,
+    add_date_picker,
+    add_textbox_list,
+    add_continuous_sum,
+    add_image_multiselect,
+    add_image_singleselect,
 } from "./add_type";
 
 export default function handler(initial_content = []) {
@@ -41,103 +51,34 @@ export default function handler(initial_content = []) {
             this.contents.push(_.cloneDeep(add_likert_grid));
         },
         add_radio_grid() {
-            this.contents.push({
-                type: "radio_grid",
-                name: "",
-                label: "",
-                questions: [],
-                options: [],
-                required: false,
-            });
+            this.contents.push(_.cloneDeep(add_radio_grid));
         },
         add_checkbox_grid() {
-            this.contents.push({
-                type: "checkbox_grid",
-                name: "",
-                label: "",
-                questions: [],
-                options: [],
-                required: false,
-            });
+            this.contents.push(_.cloneDeep(add_checkbox_grid));
         },
         add_slider() {
-            this.contents.push({
-                type: "slider",
-                name: "",
-                label: "",
-                min: 0,
-                max: 10,
-                step: 1,
-                default: 5,
-                label_min: "",
-                label_max: "",
-                label_mid: "",
-                required: false,
-            });
+            this.contents.push(_.cloneDeep(add_slider));
         },
         add_select() {
-            this.contents.push({
-                type: "select",
-                name: "",
-                label: "",
-                options: [],
-                required: false,
-            });
+            this.contents.push(_.cloneDeep(add_select));
         },
         add_date() {
-            this.contents.push({
-                type: "date",
-                name: "",
-                label: "",
-                required: false,
-                format: "YYYY-MM-DD",
-            });
+            this.contents.push(_.cloneDeep(add_date));
         },
         add_date_picker() {
-            this.contents.push({
-                type: "date_picker",
-                name: "",
-                label: "",
-                min: "",
-                max: "",
-                required: false,
-            });
+            this.contents.push(_.cloneDeep(add_date_picker));
         },
         add_textbox_list() {
-            this.contents.push({
-                type: "textbox_list",
-                name: "",
-                label: "",
-                questions: [],
-                required: false,
-            });
+            this.contents.push(_.cloneDeep(add_textbox_list));
         },
         add_continuous_sum() {
-            this.contents.push({
-                type: "continuous_sum",
-                name: "",
-                label: "",
-                questions: [],
-                required: false,
-            });
+            this.contents.push(_.cloneDeep(add_continuous_sum));
         },
         add_image_multiselect() {
-            this.contents.push({
-                type: "image_multiselect",
-                name: "",
-                label: "",
-                options: [],
-                required: false,
-            });
+            this.contents.push(_.cloneDeep(add_image_multiselect));
         },
         add_image_singleselect() {
-            this.contents.push({
-                type: "image_singleselect",
-                name: "",
-                label: "",
-                options: [],
-                required: false,
-            });
+            this.contents.push(_.cloneDeep(add_image_singleselect));
         },
         add_slider_list() {
             this.contents.push(_.cloneDeep(add_slider_list));
@@ -149,6 +90,16 @@ export default function handler(initial_content = []) {
         },
         add_question(index) {
             this.contents[index].questions.push({ label: "", name: "" });
+        },
+        add_logic(index) {
+            this.contents[index].logics.push({
+                type: "",
+                name: "",
+                value: "",
+            });
+        },
+        remove_logic(index, l_index) {
+            this.contents[index].logics.splice(l_index, 1);
         },
         remove_question(index, q_index) {
             this.contents[index].questions.splice(q_index, 1);
@@ -214,6 +165,9 @@ export default function handler(initial_content = []) {
             this.fake.remove();
             this.dragged = null;
             this.dragging = false;
+        },
+        get mcqs() {
+            return this.contents.filter((c) => ['radio', 'select'].includes(c.type));
         },
         dragenter(idx, node) {},
         dragleave(idx, node) {},

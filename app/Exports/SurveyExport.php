@@ -2,13 +2,11 @@
 
 namespace App\Exports;
 
-use App\Models\Survey;
 use App\Models\Picture;
 use Maatwebsite\Excel\Concerns\FromCollection;
 
 class SurveyExport implements FromCollection
 {
-
     public function __construct($survey)
     {
         $for_csv = collect([]);
@@ -38,22 +36,21 @@ class SurveyExport implements FromCollection
                     } else {
                         $value = Picture::find($name)->name;
                     }
-
                 } elseif (collect(['checkbox', 'drag_and_drop_ranking', 'image_multiselect'])->contains($content['type'])) {
                     $names = $a_contents->get($content->get('name'));
                     $get_options = collect($content->get('options'));
                     $this_row = collect([]);
 
-                        foreach ($names as $name) {
-                            if ($content['type'] == 'image_multiselect') {
-                                $value = Picture::find($name)->name;
-                            } else {
-                                $find_value = $get_options->firstWhere('value', $name);
-                                $value = collect($find_value)['option'];
-                            }
-                            $this_row->push($value);
+                    foreach ($names as $name) {
+                        if ($content['type'] == 'image_multiselect') {
+                            $value = Picture::find($name)->name;
+                        } else {
+                            $find_value = $get_options->firstWhere('value', $name);
+                            $value = collect($find_value)['option'];
                         }
-                    
+                        $this_row->push($value);
+                    }
+
                     $value = $this_row->join('; ');
                 } elseif ($content['type'] == 'textbox_list' || $content['type'] == 'continuous_sum') {
                     $this_row = collect([]);
@@ -114,8 +111,8 @@ class SurveyExport implements FromCollection
     }
 
     /**
-    * @return \Illuminate\Support\Collection
-    */
+     * @return \Illuminate\Support\Collection
+     */
     public function collection()
     {
         return $this->for_csv;

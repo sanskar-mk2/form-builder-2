@@ -3,6 +3,7 @@ const add_text = {
     name: "",
     label: "",
     required: false,
+    logics: [],
 };
 
 const add_checkbox = {
@@ -11,6 +12,7 @@ const add_checkbox = {
     label: "",
     options: [],
     required: false,
+    logics: [],
 };
 
 const add_description = {
@@ -18,6 +20,7 @@ const add_description = {
     name: "",
     label: "",
     required: false,
+    logics: [],
 };
 
 const add_radio = {
@@ -26,6 +29,7 @@ const add_radio = {
     label: "",
     options: [],
     required: false,
+    logics: [],
 };
 
 const add_drag_and_drop_ranking = {
@@ -34,6 +38,7 @@ const add_drag_and_drop_ranking = {
     label: "",
     options: [],
     required: false,
+    logics: [],
 };
 
 const add_likert = {
@@ -48,6 +53,7 @@ const add_likert = {
         { option: "Very Satisfied", value: "very-satisfied" },
     ],
     required: false,
+    logics: [],
 };
 
 const add_likert_grid = {
@@ -63,6 +69,7 @@ const add_likert_grid = {
         { option: "Very Satisfied", value: "very-satisfied" },
     ],
     required: false,
+    logics: [],
 };
 
 const add_slider_list = {
@@ -77,7 +84,107 @@ const add_slider_list = {
     label_max: "",
     label_mid: "",
     required: false,
+    logics: [],
     questions: [],
+};
+
+const add_radio_grid = {
+    type: "radio_grid",
+    name: "",
+    label: "",
+    questions: [],
+    options: [],
+    required: false,
+    logics: [],
+};
+
+const add_checkbox_grid = {
+    type: "checkbox_grid",
+    name: "",
+    label: "",
+    questions: [],
+    options: [],
+    required: false,
+    logics: [],
+};
+
+const add_slider = {
+    type: "slider",
+    name: "",
+    label: "",
+    min: 0,
+    max: 10,
+    step: 1,
+    default: 5,
+    label_min: "",
+    label_max: "",
+    label_mid: "",
+    required: false,
+    logics: [],
+};
+
+const add_select = {
+    type: "select",
+    name: "",
+    label: "",
+    options: [],
+    required: false,
+    logics: [],
+};
+
+const add_date = {
+    type: "date",
+    name: "",
+    label: "",
+    required: false,
+    logics: [],
+    format: "YYYY-MM-DD",
+};
+
+const add_date_picker = {
+    type: "date_picker",
+    name: "",
+    label: "",
+    min: "",
+    max: "",
+    required: false,
+    logics: [],
+};
+
+const add_textbox_list = {
+    type: "textbox_list",
+    name: "",
+    label: "",
+    questions: [],
+    required: false,
+    logics: [],
+};
+
+const add_continuous_sum = {
+    type: "continuous_sum",
+    name: "",
+    label: "",
+    questions: [],
+    required: false,
+    logics: [],
+};
+
+const add_image_multiselect = {
+    type: "image_multiselect",
+    name: "",
+    label: "",
+    options: [],
+    required: false,
+    logics: [],
+};
+
+const add_image_singleselect = {
+    type: "image_singleselect",
+    name: "",
+    label: "",
+    options: [],
+    required: false,
+    logics: [],
 };
 
 export {
@@ -89,4 +196,14 @@ export {
     add_likert,
     add_likert_grid,
     add_slider_list,
+    add_radio_grid,
+    add_checkbox_grid,
+    add_slider,
+    add_select,
+    add_date,
+    add_date_picker,
+    add_textbox_list,
+    add_continuous_sum,
+    add_image_multiselect,
+    add_image_singleselect,
 };

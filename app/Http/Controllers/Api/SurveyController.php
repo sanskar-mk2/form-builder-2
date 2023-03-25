@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Enums\SurveyStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\SurveyCollection;
 use App\Http\Resources\SurveyResource;
@@ -17,7 +18,7 @@ class SurveyController extends Controller
      */
     public function index()
     {
-        return new SurveyCollection(Survey::paginate());
+        return new SurveyCollection(Survey::where('status', SurveyStatus::Published)->paginate(10));
     }
 
     /**
