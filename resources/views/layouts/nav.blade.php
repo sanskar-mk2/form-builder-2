@@ -2,7 +2,7 @@
     <div class="flex-1">
         <a href="{{ route('index') }}" class="btn btn-ghost normal-case text-xl">Sacoda Serv</a>
         @auth
-        <a href="{{ route('surveys.index') }}" class="btn btn-ghost normal-case text-lg">Surveys</a>
+        <a href="{{ route('filament.resources.surveys.index') }}" class="btn btn-ghost normal-case text-lg">Surveys</a>
         <a href="{{ route('filament.resources.answers.index') }}" class="btn btn-ghost normal-case text-lg">Answers</a>
         @endauth
     </div>

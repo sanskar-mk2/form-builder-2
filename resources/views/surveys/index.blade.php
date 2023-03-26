@@ -1,5 +1,10 @@
 <x-base-layout>
-    <h2 class="text-3xl pt-8 text-center">Published Surveys</h2>
+    <h2 class="text-3xl pt-8 text-center">
+        Published Surveys
+        <a href="{{ route('surveys.create') }}">
+            <button class="btn btn-primary">Create New Survey</button>
+        </a>
+    </h2>
     <section class="my-8 flex flex-wrap gap-8 justify-center">
         @foreach ($surveys as $survey)
         <div class="card w-96 bg-base-100 shadow-xl image-full">

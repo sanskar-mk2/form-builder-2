@@ -29,11 +29,20 @@ export default function handler(initial_content = []) {
         over: null,
         error: "",
         contents: initial_content,
-        add_drag_and_drop_ranking() {
-            this.contents.push(_.cloneDeep(add_drag_and_drop_ranking));
+        add_drag_and_drop_ranking(idx) {
+            if (idx === -1) {
+                this.contents.push(_.cloneDeep(add_drag_and_drop_ranking));
+            } else {
+                // insert above the idx
+                this.contents.splice(idx, 0, _.cloneDeep(add_drag_and_drop_ranking));
+            }
         },
-        add_text() {
-            this.contents.push(_.cloneDeep(add_text));
+        add_text(idx){
+            if (idx === -1) {
+                this.contents.push(_.cloneDeep(add_text));
+            } else {
+                this.contents.splice(idx, 0, _.cloneDeep(add_text));
+            }
         },
         add_checkbox() {
             this.contents.push(_.cloneDeep(add_checkbox));
@@ -167,7 +176,9 @@ export default function handler(initial_content = []) {
             this.dragging = false;
         },
         get mcqs() {
-            return this.contents.filter((c) => ['radio', 'select'].includes(c.type));
+            return this.contents.filter((c) =>
+                ["radio", "select"].includes(c.type)
+            );
         },
         dragenter(idx, node) {},
         dragleave(idx, node) {},

@@ -3,7 +3,7 @@
         <div class="flex flex-col gap-4 w-full my-4">
             <x-template-master />
         </div>
-        <x-add-input />
+        <x-add-input x-data="{dd_idx: -1}" />
         <form x-on:submit.prevent="()=>{error=validate(); if (! error) $event.target.submit();}" class="form-control pt-4 gap-4" method="POST" action="{{ route('surveys.store') }}">
             @csrf
             <label>

@@ -1,5 +1,6 @@
 <template x-for="(content, index) in contents" :key="index">
-    <div class="flex flex-col gap-4">
+    <div x-data="{add_show: false}" x-on:mouseleave="add_show=false" x-on:mouseenter="add_show=true" class="flex flex-col gap-4">
+        <x-add-input x-data="{dd_idx: index}" x-show="add_show" />
         <div
             class="card w-full bg-base-100 shadow-xl">
             <div x-on:dragstart.self="dragstart(index, $event.target);$event.dataTransfer.effectAllowed='move';"

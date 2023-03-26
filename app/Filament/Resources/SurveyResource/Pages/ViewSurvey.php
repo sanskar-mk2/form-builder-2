@@ -33,6 +33,9 @@ class ViewSurvey extends ViewRecord
             ->action('export_to_excel')
             ->requiresConfirmation();
 
+        $ret[] = Actions\Action::make('results')
+            ->action(fn () => $this->redirect(route('results.show', $this->record->id)));
+
         return [
             Actions\EditAction::make(),
             ...$ret,
