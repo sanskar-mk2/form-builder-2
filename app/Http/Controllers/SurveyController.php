@@ -65,8 +65,8 @@ class SurveyController extends Controller
      */
     public function edit(Survey $survey)
     {
-        return view('surveys.edit')
-            ->with(['survey' => $survey]);
+     return view('surveys.edit')->with(['survey' => $survey]);
+    //   return $survey;  
     }
 
     /**

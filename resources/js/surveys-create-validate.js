@@ -185,5 +185,7 @@ export default function validate(contents) {
         }
     }
     console.log("validate success");
+
+    localStorage.setItem("contents",'[]')
     return 0;
 }

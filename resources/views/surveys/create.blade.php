@@ -1,9 +1,11 @@
 <x-base-layout>
     <section x-data="handler({{ old('contents') }})" class="w-full">
-        <div class="flex flex-col gap-4 w-full my-4">
+      
+        <div class="flex flex-col gap-4 w-full my-4" id="main-container">
             <x-template-master />
         </div>
         <x-add-input x-data="{dd_idx: -1}" />
+        <x-reorder x-on:click="reorder()" />
         <form x-on:submit.prevent="()=>{error=validate(); if (! error) $event.target.submit();}" class="form-control pt-4 gap-4" method="POST" action="{{ route('surveys.store') }}">
             @csrf
             <label>
@@ -15,5 +17,6 @@
             <input type="submit" class="btn w-36 btn-primary" >
             <p class="text-error" x-text="error ? error : ''"></p>
         </form>
+       
     </section>
 </x-base-layout>

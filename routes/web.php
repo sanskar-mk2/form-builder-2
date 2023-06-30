@@ -17,7 +17,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::post('/template',function(){
+    return view('components.template-master');
+});
 Route::get('/', IndexController::class)->name('index');
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');

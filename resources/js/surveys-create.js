@@ -20,7 +20,9 @@ import {
     add_image_singleselect,
 } from "./add_type";
 
-export default function handler(initial_content = []) {
+export default function handler(initial_content = JSON.parse(localStorage.getItem("contents"))) {
+   
+    localStorage.setItem("contents", JSON.stringify(initial_content));
     return {
         dragged: null,
         add_dd: false,
@@ -29,7 +31,10 @@ export default function handler(initial_content = []) {
         over: null,
         error: "",
         contents: initial_content,
+
+        
         add_drag_and_drop_ranking(idx) {
+          
             if (idx === -1) {
                 this.contents.push(_.cloneDeep(add_drag_and_drop_ranking));
             } else {
@@ -38,11 +43,18 @@ export default function handler(initial_content = []) {
             }
         },
         add_text(idx){
+           // console.log(this.contents);
             if (idx === -1) {
                 this.contents.push(_.cloneDeep(add_text));
             } else {
                 this.contents.splice(idx, 0, _.cloneDeep(add_text));
             }
+        },
+        tempStore(){
+            console.log("old content",this.contents);
+localStorage.setItem("contents", JSON.stringify(this.contents));
+var oldContent=localStorage.getItem("contents");
+console.log("tempsave",oldContent);
         },
         add_checkbox() {
             this.contents.push(_.cloneDeep(add_checkbox));
@@ -120,7 +132,42 @@ export default function handler(initial_content = []) {
             this.contents[index].options.splice(op_index, 1);
         },
         remove(index) {
-            this.contents.splice(index, 1);
+            
+           var removed =this.contents.splice(index,1);
+           localStorage.setItem("contents", JSON.stringify(this.contents));
+           location.reload();
+        },
+        down(index){
+          
+            var current=this.contents[index];
+            this.contents[index]=this.contents[index+1];
+            this.contents[index+1]=current;
+            localStorage.setItem("contents", JSON.stringify(this.contents));
+            location.reload();
+        },
+        up(index){
+            var current=this.contents[index];
+            this.contents[index]=this.contents[index-1];
+            this.contents[index-1]=current;
+            var contents=JSON.stringify(this.contents);
+            localStorage.setItem("contents", contents);
+           // location.reload();
+       
+        },
+        
+        reorder(){
+            console.log(this.contents);
+            function shuffle(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                  const j = Math.floor(Math.random() * (i + 1));
+                  [array[i], array[j]] = [array[j], array[i]];
+                }
+                return array;
+              }
+              shuffle(this.contents);
+              localStorage.setItem("contents", JSON.stringify(this.contents));
+              location.reload();
+            
         },
         validate() {
             return validate(this.contents);
