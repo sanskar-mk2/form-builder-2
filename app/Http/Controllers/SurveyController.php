@@ -42,6 +42,7 @@ class SurveyController extends Controller
                 'contents' => $request->contents,
             ]
         );
+        session()->forget('survey');
 
         return redirect()->route('filament.resources.surveys.index');
     }

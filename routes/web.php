@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\ResultController;
 use App\Http\Controllers\SurveyController;
+use App\Http\Controllers\ImportExport;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,3 +34,8 @@ Route::group(['middleware' => 'auth'], function () {
 Route::resource('/answers', AnswerController::class);
 Route::get('/results/{survey}', [ResultController::class, 'show'])
     ->name('results.show');
+
+    Route::post('/import',[ImportExport::class,
+            'import'])->name('import');
+ Route::get('/export',[ImportExport::class,
+            'export'])->name('export');

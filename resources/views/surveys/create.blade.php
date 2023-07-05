@@ -1,8 +1,23 @@
-<x-base-layout>
-    <section x-data="handler({{ old('contents') }})" class="w-full">
+@if(session()->has('survey'))
+@php
+    $survey = session('survey');
+@endphp
+<div x-data x-init="localStorage.setItem('contents',JSON.stringify({{$survey}} ) )">
+      </div> 
       
-        <div class="flex flex-col gap-4 w-full my-4" id="main-container">
+ 
+@endif
+<x-base-layout>
+    <section x-data="handler( @if(session()->has('survey')) @js( $survey)  @else {{ old('contents')}} @endif)" class="w-full px-6">
+
+      <x-export-import/>
+     
+
+
+        <div x-data="{ contents: {{ old('contents')}} }" class="flex flex-col gap-4 w-full my-4" id="main-container" >
+
             <x-template-master />
+
         </div>
         <x-add-input x-data="{dd_idx: -1}" />
         <x-reorder x-on:click="reorder()" />

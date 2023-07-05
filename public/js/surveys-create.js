@@ -22,7 +22,7 @@ import {
 
 export default function handler(initial_content = JSON.parse(localStorage.getItem("contents"))) {
    console.log("old content");
-   // localStorage.setItem('contents', {{session('survey')}});
+   // localStorage.setItem("contents", JSON.stringify(initial_content));
     return {
         dragged: null,
         add_dd: false,
@@ -52,9 +52,9 @@ export default function handler(initial_content = JSON.parse(localStorage.getIte
         },
         tempStore(){
             console.log("old content",this.contents);
- localStorage.setItem("contents", JSON.stringify(this.contents));
- var oldContent=localStorage.getItem("contents");
- console.log("tempsave",oldContent);
+localStorage.setItem("contents", JSON.stringify(this.contents));
+var oldContent=localStorage.getItem("contents");
+console.log("tempsave",oldContent);
         },
         add_checkbox() {
             this.contents.push(_.cloneDeep(add_checkbox));
@@ -133,10 +133,9 @@ export default function handler(initial_content = JSON.parse(localStorage.getIte
         },
         remove(index) {
             
-          this.contents.splice(index,1);
+           var removed =this.contents.splice(index,1);
            localStorage.setItem("contents", JSON.stringify(this.contents));
-           handler(this.contents);
-          
+           location.reload();
         },
         down(index){
           
@@ -144,6 +143,7 @@ export default function handler(initial_content = JSON.parse(localStorage.getIte
             this.contents[index]=this.contents[index+1];
             this.contents[index+1]=current;
             localStorage.setItem("contents", JSON.stringify(this.contents));
+            location.reload();
         },
         up(index){
             var current=this.contents[index];
@@ -151,11 +151,26 @@ export default function handler(initial_content = JSON.parse(localStorage.getIte
             this.contents[index-1]=current;
             var contents=JSON.stringify(this.contents);
             localStorage.setItem("contents", contents);
-         
-     
+          // location.reload();
+          console.log(contents);
+            $.ajax({
+             url:"/template",
+             type:"POST",
+             data:{contents:this.contents},
+             headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+             success:function(res){
+                 $("#main-container").html(res);
+                 console.log(res);
+             }
+
+           })
+       // handler(this.contents);
         },
         
         reorder(){
+            console.log(this.contents);
             function shuffle(array) {
                 for (let i = array.length - 1; i > 0; i--) {
                   const j = Math.floor(Math.random() * (i + 1));
@@ -165,7 +180,7 @@ export default function handler(initial_content = JSON.parse(localStorage.getIte
               }
               shuffle(this.contents);
               localStorage.setItem("contents", JSON.stringify(this.contents));
-          
+              location.reload();
             
         },
         validate() {

@@ -1,9 +1,17 @@
 <x-base-layout>
-    <section x-data="handler({{ old('contents') ?? 0 }} || @js($survey->contents))" class="w-full">
-        <div class="flex flex-col gap-4 w-full my-4">
-            <x-template-master />
+ 
+    {{-- <div x-data x-init="localStorage.setItem('contents', JSON.stringify(@js($survey->contents)))">
+      </div> --}}
+      
+    {{-- <input type="hidden" name="" x-data="{ stored_data: '' }" x-init="stored_data = (localStorage.getItem('contents')) || @js($survey->contents)" x-model="stored_data" /> --}}
+
+
+    <section  x-data="handler({{ old('contents') ?? 0 }} || @js($survey->contents))" class="w-full">
+        <div x-data="{ contents: {{ old('contents')}} }" class="flex flex-col gap-4 w-full my-4">
+            <x-template-master  />
         </div>
-        <x-add-input />
+        <x-add-input x-data="{dd_idx: -1}" />
+        <x-reorder x-on:click="reorder()" />
         <form x-on:submit.prevent="()=>{error=validate(); if (! error) $event.target.submit();}" class="form-control pt-4 gap-4" method="POST" action="{{ route('surveys.update', $survey->id) }}">
             @csrf
             @method('PATCH')
@@ -17,4 +25,6 @@
             <p class="text-error" x-text="error ? error : ''"></p>
         </form>
     </section>
+
+  
 </x-base-layout>
