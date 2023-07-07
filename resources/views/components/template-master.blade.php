@@ -19,7 +19,7 @@
                 <h3 class="font-extrabold text-2xl text-secondary" x-text="`${index+1}. ${content.type.replace(/_/g, ' ').toUpperCase()}`"></h3>
                 <div>
                     <template x-if="index!=0">
-                        <x-up x-on:click="contents=up(index)" />
+                        <x-up x-on:click="up(index)" />
                     </template>
                     <template x-if="index!= contents.length-1">
                         <x-down x-on:click="down(index)" />

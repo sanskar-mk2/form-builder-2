@@ -1,12 +1,9 @@
+<div x-data="{ oldContents: {{ json_encode($survey->contents) }} }" x-init="localStorage.setItem('oldContents', JSON.stringify(oldContents))">
+</div>
+
+
 <x-base-layout>
- 
-    {{-- <div x-data x-init="localStorage.setItem('contents', JSON.stringify(@js($survey->contents)))">
-      </div> --}}
-      
-    {{-- <input type="hidden" name="" x-data="{ stored_data: '' }" x-init="stored_data = (localStorage.getItem('contents')) || @js($survey->contents)" x-model="stored_data" /> --}}
-
-
-    <section  x-data="handler({{ old('contents') ?? 0 }} || @js($survey->contents))" class="w-full">
+    <section  x-data="handler({{ old('contents') ?? 0 }} || @js($survey->contents))" class="w-full px-6">
         <div x-data="{ contents: {{ old('contents')}} }" class="flex flex-col gap-4 w-full my-4">
             <x-template-master  />
         </div>

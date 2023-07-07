@@ -19,5 +19,37 @@
             </div>
         </div>
         @livewireScripts
+
+        <script>
+
+          
+                var URL = window.location.href;
+var parts = URL.split("/");
+var lastPart = parts.pop();
+if(lastPart=='edit'){
+   
+
+    window.addEventListener("beforeunload", function(event) {
+        alert( window.location.href);
+        var oldcontent=localStorage.getItem("oldContents");
+    var newcontent=localStorage.getItem("contents");
+    if(oldcontent != newcontent)
+var discard=confirm("Want to discard changes !")
+if(discard){
+    localStorage.setItem('contents',JSON.stringify([]) );
+}
+
+    });
+
+  
+
+
+
+
+            }
+         
+
+
+        </script>
     </body>
 </html>

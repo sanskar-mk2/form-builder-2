@@ -2,9 +2,12 @@
 @php
     $survey = session('survey');
 @endphp
-<div x-data x-init="localStorage.setItem('contents',JSON.stringify({{$survey}} ) )">
-      </div> 
+{{-- <div x-data x-init="localStorage.setItem('contents',JSON.stringify({{$survey}} ) )">
+      </div>  --}}
       
+      <div x-data="{ contents: {{ $survey }} }" x-init="localStorage.setItem('contents', JSON.stringify(contents))">
+    </div>
+   
  
 @endif
 <x-base-layout>

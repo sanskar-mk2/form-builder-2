@@ -22,7 +22,7 @@ import {
 
 export default function handler(initial_content = JSON.parse(localStorage.getItem("contents"))) {
    console.log("old content");
-   // localStorage.setItem('contents', {{session('survey')}});
+    //localStorage.setItem('oldcontents', JSON.stringify(initial_content));
     return {
         dragged: null,
         add_dd: false,
