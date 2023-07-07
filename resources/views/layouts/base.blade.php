@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-        <title>Laravel</title>
+        <title>Survey</title>
 
         @vite('resources/css/app.css')
         @vite('resources/js/app.js')
@@ -21,8 +21,12 @@
         @livewireScripts
 
         <script>
+if (!localStorage.getItem('contents') && !localStorage.getItem('oldContents')) {
 
-          
+  localStorage.setItem('contents',JSON.stringify([]) );
+  localStorage.setItem('oldContents',JSON.stringify([]));
+}
+
                 var URL = window.location.href;
 var parts = URL.split("/");
 var lastPart = parts.pop();
@@ -40,12 +44,6 @@ if(discard){
 }
 
     });
-
-  
-
-
-
-
             }
          
 
