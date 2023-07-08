@@ -18,6 +18,14 @@
                 class="px-4 py-2 hover:cursor-move bg-base-300 card-actions items-center justify-between">
                 <h3 class="font-extrabold text-2xl text-secondary" x-text="`${index+1}. ${content.type.replace(/_/g, ' ').toUpperCase()}`"></h3>
                 <div>
+                    <template x-if="index>=0">
+                        <x-copy x-on:click="copy(index)"/>
+                    </template>
+                    <template x-if="index>=0">  
+                        <x-paste x-on:click="paste(index)"/>
+                        
+                    </template>
+                    
                     <template x-if="index!=0">
                         <x-up x-on:click="up(index)" />
                     </template>
@@ -25,6 +33,8 @@
                         <x-down x-on:click="down(index)" />
                     </template>
                     <x-remove x-on:click="remove(index)" />
+
+                 
                 </div>
               
             </div>

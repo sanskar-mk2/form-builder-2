@@ -13,9 +13,8 @@
 <x-base-layout>
     <section x-data="handler( @if(session()->has('survey')) @js( $survey)  @else {{ old('contents')}} @endif)" class="w-full px-6">
 
-      <x-export-import/>
      
-
+<x-import/>
 
         <div x-data="{ contents: {{ old('contents')}} }" class="flex flex-col gap-4 w-full my-4" id="main-container" >
 

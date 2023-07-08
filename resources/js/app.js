@@ -31,6 +31,5 @@ document.addEventListener("alpine:init", () => {
 });
 
 Alpine.start();
-
 import { themeChange } from "theme-change";
 themeChange();

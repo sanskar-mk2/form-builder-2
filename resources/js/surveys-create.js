@@ -31,7 +31,7 @@ export default function handler(initial_content = JSON.parse(localStorage.getIte
         over: null,
         error: "",
         contents: initial_content,
-
+        copiedContent:JSON.stringify([]),
         
         add_drag_and_drop_ranking(idx) {
           
@@ -51,7 +51,7 @@ export default function handler(initial_content = JSON.parse(localStorage.getIte
             }
         },
         tempStore(){
-            console.log("old content",this.contents);
+    
  localStorage.setItem("contents", JSON.stringify(this.contents));
  var oldContent=localStorage.getItem("contents");
  console.log("tempsave",oldContent);
@@ -167,6 +167,26 @@ export default function handler(initial_content = JSON.parse(localStorage.getIte
               localStorage.setItem("contents", JSON.stringify(this.contents));
           
             
+        },
+        copy(index){
+        
+   
+    navigator.clipboard.writeText(JSON.stringify(this.contents[index]))
+    .then(() => {
+        this.copiedContent=this.contents[index];
+      console.log('Text copied to clipboard: ' +JSON.stringify(this.copiedContent));
+
+      console.log(this.contents);
+    })
+    .catch((error) => {
+      console.error('Failed to copy text to clipboard: ' + error);
+    });
+        },
+        paste(index){
+            if(this.copiedContent != "[]")
+this.contents[index]=this.copiedContent;
+handler(this.contents);
+this.copiedContent=this.contents[index];
         },
         validate() {
             return validate(this.contents);

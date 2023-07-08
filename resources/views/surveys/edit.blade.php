@@ -4,7 +4,11 @@
 
 <x-base-layout>
     <section  x-data="handler({{ old('contents') ?? 0 }} || @js($survey->contents))" class="w-full px-6">
-        <div x-data="{ contents: {{ old('contents')}} }" class="flex flex-col gap-4 w-full my-4">
+
+
+
+        <x-export/>
+        <div x-data="{ contents: {{ old('contents')}}, id: {{$survey->id}} }" class="flex flex-col gap-4 w-full my-4">
             <x-template-master  />
         </div>
         <x-add-input x-data="{dd_idx: -1}" />

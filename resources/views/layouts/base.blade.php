@@ -6,7 +6,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
         <title>Survey</title>
-
+        
         @vite('resources/css/app.css')
         @vite('resources/js/app.js')
         @livewireStyles
