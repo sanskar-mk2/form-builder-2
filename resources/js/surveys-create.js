@@ -168,9 +168,7 @@ export default function handler(initial_content = JSON.parse(localStorage.getIte
           
             
         },
-        copy(index){
-        
-   
+        copy(index){   
     navigator.clipboard.writeText(JSON.stringify(this.contents[index]))
     .then(() => {
         this.copiedContent=this.contents[index];
