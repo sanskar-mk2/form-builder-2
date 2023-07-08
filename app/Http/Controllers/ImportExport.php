@@ -11,6 +11,9 @@ use App\Models\Suvery;
 class ImportExport extends Controller
 {
     public function import(Request $request){
+        if(!$request->file('file')){
+            return redirect()->back();
+        }
         $survey=new ImportSurvey;
         Excel::import( $survey,
                       $request->file('file')->store('files'));

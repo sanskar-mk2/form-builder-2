@@ -168,7 +168,7 @@ export default function handler(initial_content = JSON.parse(localStorage.getIte
           
             
         },
-        copy(index){   
+        copyClipboard(index){   
     navigator.clipboard.writeText(JSON.stringify(this.contents[index]))
     .then(() => {
         this.copiedContent=this.contents[index];
@@ -180,7 +180,7 @@ export default function handler(initial_content = JSON.parse(localStorage.getIte
       console.error('Failed to copy text to clipboard: ' + error);
     });
         },
-        paste(index){
+        pasteClipboard(index){
             if(this.copiedContent != "[]")
 this.contents[index]=this.copiedContent;
 handler(this.contents);

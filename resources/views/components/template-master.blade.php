@@ -19,10 +19,10 @@
                 <h3 class="font-extrabold text-2xl text-secondary" x-text="`${index+1}. ${content.type.replace(/_/g, ' ').toUpperCase()}`"></h3>
                 <div>
                     <template x-if="index>=0">
-                        <x-copy x-on:click="copy(index)"/>
+                        <x-copy x-on:click="copyClipboard(index)"/>
                     </template>
                     <template x-if="index>=0">  
-                        <x-paste x-on:click="paste(index)"/>
+                        <x-paste x-on:click="pasteClipboard(index)"/>
                         
                     </template>
                     
