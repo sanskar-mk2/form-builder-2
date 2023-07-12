@@ -11,8 +11,11 @@ class ExportSurvey implements FromCollection
     /**
     * @return \Illuminate\Support\Collection
     */
+    
+
     public function collection()
     {
+        
         return Survey::all();
     }
 }

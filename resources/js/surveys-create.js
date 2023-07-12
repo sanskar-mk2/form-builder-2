@@ -183,7 +183,8 @@ export default function handler(initial_content = JSON.parse(localStorage.getIte
         pasteClipboard(index){
             if(this.copiedContent != "[]")
 this.contents[index]=this.copiedContent;
-handler(this.contents);
+tempStore();
+
 this.copiedContent=this.contents[index];
         },
         validate() {

@@ -11,7 +11,7 @@
  
 @endif
 <x-base-layout>
-    <section x-data="handler( @if(session()->has('survey')) @js( $survey)  @else {{ old('contents')}} @endif)" class="w-full px-6">
+    <section x-data="handler( @if(session()->has('survey'))JSON.parse(localStorage.getItem('contents'))  @else {{ old('contents')}} @endif)" class="w-full px-6">
 
      
 <x-import/>

@@ -5,7 +5,7 @@
     <div  class="flex flex-col gap-4">
         
 
-        <div  x-on:mouseleave="tempStore()"
+        <div  x-on:click="tempStore()"
             class="card w-full bg-base-100 shadow-xl">
             <div x-on:dragstart.self="dragstart(index, $event.target);$event.dataTransfer.effectAllowed='move';"
                 draggable="true"

@@ -20,13 +20,14 @@ class ImportExport extends Controller
 
                  $survey=json_encode($survey->contents);
                    $data=compact('survey');
-                //  dd($survey);
                      return redirect()->back()->with(['survey' => $survey]);
 
                    
     }
 
-    public function export(Request $request){
+    public function export(Request $request ){
+       
+
         return (new ExportSurvey)->download('survey.xlsx');
      }
 }
