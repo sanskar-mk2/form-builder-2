@@ -96,7 +96,7 @@
                         <div class="flex gap-8 items-center">
 
                             <x-checkbox x-data="{required: false}" x-init="required = false" x-on:click="required = !required" x-model="content.required" label="Required" />
-<button x-show="content.required" x-on:click="add_logic(index)" class="btn btn-primary w-32">
+<button x-on:click="add_logic(index)" class="btn btn-primary w-32">
     Add Logic
 </button>
                         </div>
