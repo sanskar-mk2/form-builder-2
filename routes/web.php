@@ -6,7 +6,9 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\ResultController;
 use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\ImportExport;
+use App\Http\Controllers\PictureController;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -42,3 +44,4 @@ Route::get('/results/{survey}', [ResultController::class, 'show'])
 
             Route::post('/upload',[ImportExport::class,
             'upload'])->name('upload');
+            Route::post('/upload-picture',[PictureController::class,'store'])->name('upload_picture');
