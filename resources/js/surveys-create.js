@@ -128,6 +128,12 @@ export default function handler(initial_content = JSON.parse(localStorage.getIte
         add_option(index) {
             this.contents[index].options.push({ option: "", value: "" });
         },
+        upload_option(index,option){ 
+for(var i=0;i<option.length;i++){
+    this.contents[index].options.push({ option:option[i], value:this.slugify(option[i]) });  
+}
+
+          },
         remove_option(index, op_index) {
             this.contents[index].options.splice(op_index, 1);
         },

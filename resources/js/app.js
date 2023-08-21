@@ -28,8 +28,29 @@ document.addEventListener("alpine:init", () => {
     Alpine.data("alpine_bar", () => ({ ...alpine_bar }));
     Alpine.data("alpine_checkbox_bar", () => ({ ...alpine_checkbox_bar }));
     Alpine.data("alpine_date_line", () => ({ ...alpine_date_line }));
+    Alpine.data('myForm', () => ({
+        response: '',
+        submitForm(event) {
+            fetch(event.target.action, {
+                method: 'POST',
+                body: new FormData(event.target),
+            })
+            .then(response => response.text())
+            .then(data => {
+                this.response = data; // Update the response
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    }));
 });
 
 Alpine.start();
 import { themeChange } from "theme-change";
 themeChange();
+
+
+
+
+

@@ -39,3 +39,6 @@ Route::get('/results/{survey}', [ResultController::class, 'show'])
             'import'])->name('import');
  Route::get('/export',[ImportExport::class,
             'export'])->name('export');
+
+            Route::post('/upload',[ImportExport::class,
+            'upload'])->name('upload');

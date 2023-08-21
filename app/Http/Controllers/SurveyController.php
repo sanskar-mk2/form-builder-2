@@ -39,6 +39,7 @@ class SurveyController extends Controller
         $survey = Survey::create(
             [
                 'name' => $request->name,
+                'description'=>$request->description,
                 'contents' => $request->contents,
             ]
         );

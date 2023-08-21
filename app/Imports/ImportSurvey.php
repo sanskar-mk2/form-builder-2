@@ -142,7 +142,7 @@ public function add_slider_list($label,$row,$start,$required){
 }
 public function add_slider($label,$row,$start,$required){
         return [
-            'type'=>'slider_list',
+            'type'=>'slider',
             "name"=> str_replace(' ','-',$label),
             "label"=> $label,
             "min"=>$row[$start],

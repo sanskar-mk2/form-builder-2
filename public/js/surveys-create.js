@@ -128,6 +128,7 @@ console.log("tempsave",oldContent);
         add_option(index) {
             this.contents[index].options.push({ option: "", value: "" });
         },
+      
         remove_option(index, op_index) {
             this.contents[index].options.splice(op_index, 1);
         },

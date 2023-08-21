@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\ImportSurvey;
 use App\Exports\ExportSurvey;
+use App\Imports\UploadOption;
 use App\Models\Suvery;
 
 class ImportExport extends Controller
@@ -23,6 +24,27 @@ class ImportExport extends Controller
                      return redirect()->back()->with(['survey' => $survey]);
 
                    
+    }
+
+    public function upload(Request $request){
+    
+        if(!$request->file('options')){
+            return redirect()->back();
+        }
+       
+       
+        $file =   $request->file('options')->store('options') ;// Replace with the actual path to your Excel file
+    $options = new UploadOption();
+
+    Excel::import($options,  $file);
+
+       
+        //$option=json_encode($options->options);
+        $option=$options->options;
+        $data = compact('option');
+        return $options->options;
+       // return redirect()->back()->with(['options'=>$options->options]);
+       // return $option=json_encode($options->options);
     }
 
     public function export(Request $request ){

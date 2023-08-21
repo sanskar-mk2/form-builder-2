@@ -7,8 +7,19 @@
         <x-part-option-thead />
         <x-part-option-tbody />
     </table>
-    <button x-on:click="add_option(index)"
+    <div class="flex gap-6">
+        <button x-on:click="add_option(index)"
         class="btn btn-primary w-32">
         Add Option
     </button>
+    <x-upload-option/>
+    
+<x-checkbox x-data="{other: false}" x-init="other = false" x-on:click="other = !other" x-model="content.other" label="Other Option" />
+    </div>
+  
 </div>
+
+
+
+
+
