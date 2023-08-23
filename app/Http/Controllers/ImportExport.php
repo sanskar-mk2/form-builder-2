@@ -15,14 +15,15 @@ class ImportExport extends Controller
         if(!$request->file('file')){
             return redirect()->back();
         }
+     
         $survey=new ImportSurvey;
         Excel::import( $survey,
                       $request->file('file')->store('files'));
 
                  $survey=json_encode($survey->contents);
-                   $data=compact('survey');
-                     return redirect()->back()->with(['survey' => $survey]);
-
+                   return $survey;
+                //    $data=compact('survey');
+                //      return redirect()->back()->with(['survey' => $survey]);
                    
     }
 
@@ -37,14 +38,11 @@ class ImportExport extends Controller
     $options = new UploadOption();
 
     Excel::import($options,  $file);
-
-       
         //$option=json_encode($options->options);
         $option=$options->options;
         $data = compact('option');
         return $options->options;
-       // return redirect()->back()->with(['options'=>$options->options]);
-       // return $option=json_encode($options->options);
+     
     }
 
     public function export(Request $request ){

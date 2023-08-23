@@ -14,7 +14,7 @@
     </button>
     <x-upload-option/>
     
-<x-checkbox x-data="{other: false}" x-init="other = false" x-on:click="other = !other" x-model="content.other" label="Other Option" />
+<x-checkbox x-data="{other: false}" x-init="other = false" x-on:click="other = !other" x-model="content.other" label="Allow User Option" />
     </div>
   
 </div>

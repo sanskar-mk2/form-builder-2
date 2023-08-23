@@ -134,6 +134,11 @@ for(var i=0;i<option.length;i++){
 }
 
           },
+          upload_survey(data){
+            console.log("old",this.contents);
+            this.contents=data;
+            console.log("updated",this.contents);
+          },
         remove_option(index, op_index) {
             this.contents[index].options.splice(op_index, 1);
         },
