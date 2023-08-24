@@ -8,6 +8,7 @@
                 <select x-model="logic.type" class="select select-bordered">
                     <option disabled selected value="">Pick Logic</option>
                     <option value="skip">Skip</option>
+                    <option value="skip">add question</option>
                 </select>
             </td>
             <td>If</td>

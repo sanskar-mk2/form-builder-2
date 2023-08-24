@@ -39,9 +39,11 @@ class SurveyController extends Controller
         $survey = Survey::create(
             [
                 'name' => $request->name,
+                'description'=>$request->description,
                 'contents' => $request->contents,
             ]
         );
+        session()->forget('survey');
 
         return redirect()->route('filament.resources.surveys.index');
     }
@@ -65,8 +67,8 @@ class SurveyController extends Controller
      */
     public function edit(Survey $survey)
     {
-        return view('surveys.edit')
-            ->with(['survey' => $survey]);
+     return view('surveys.edit')->with(['survey' => $survey]);
+    //   return $survey;  
     }
 
     /**

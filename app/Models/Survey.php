@@ -12,7 +12,7 @@ class Survey extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'contents'];
+    protected $fillable = ['name', 'contents','description'];
 
     protected $appends = ['fields_count', 'assets'];
 

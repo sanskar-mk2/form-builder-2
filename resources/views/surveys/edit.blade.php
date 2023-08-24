@@ -1,9 +1,18 @@
+<div x-data="{ oldContents: {{ json_encode($survey->contents) }} }" x-init="localStorage.setItem('oldContents', JSON.stringify(oldContents))">
+</div>
+
+
 <x-base-layout>
-    <section x-data="handler({{ old('contents') ?? 0 }} || @js($survey->contents))" class="w-full">
-        <div class="flex flex-col gap-4 w-full my-4">
-            <x-template-master />
+    <section  x-data="handler({{ old('contents') ?? 0 }} || @js($survey->contents))" class="w-full px-6">
+
+
+
+        <x-export/>
+        <div x-data="{ contents: {{ old('contents')}}, id: {{$survey->id}} }" class="flex flex-col gap-4 w-full my-4">
+            <x-template-master  />
         </div>
-        <x-add-input />
+        <x-add-input x-data="{dd_idx: -1}" />
+        <x-reorder x-on:click="reorder()" />
         <form x-on:submit.prevent="()=>{error=validate(); if (! error) $event.target.submit();}" class="form-control pt-4 gap-4" method="POST" action="{{ route('surveys.update', $survey->id) }}">
             @csrf
             @method('PATCH')
@@ -17,4 +26,6 @@
             <p class="text-error" x-text="error ? error : ''"></p>
         </form>
     </section>
+
+  
 </x-base-layout>

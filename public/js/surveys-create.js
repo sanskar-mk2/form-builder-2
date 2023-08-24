@@ -22,7 +22,7 @@ import {
 
 export default function handler(initial_content = JSON.parse(localStorage.getItem("contents"))) {
    console.log("old content");
-    //localStorage.setItem('oldcontents', JSON.stringify(initial_content));
+   // localStorage.setItem("contents", JSON.stringify(initial_content));
     return {
         dragged: null,
         add_dd: false,
@@ -31,7 +31,7 @@ export default function handler(initial_content = JSON.parse(localStorage.getIte
         over: null,
         error: "",
         contents: initial_content,
-        copiedContent:JSON.stringify([]),
+
         
         add_drag_and_drop_ranking(idx) {
           
@@ -51,10 +51,10 @@ export default function handler(initial_content = JSON.parse(localStorage.getIte
             }
         },
         tempStore(){
-    
- localStorage.setItem("contents", JSON.stringify(this.contents));
- var oldContent=localStorage.getItem("contents");
- console.log("tempsave",oldContent);
+            console.log("old content",this.contents);
+localStorage.setItem("contents", JSON.stringify(this.contents));
+var oldContent=localStorage.getItem("contents");
+console.log("tempsave",oldContent);
         },
         add_checkbox() {
             this.contents.push(_.cloneDeep(add_checkbox));
@@ -128,26 +128,15 @@ export default function handler(initial_content = JSON.parse(localStorage.getIte
         add_option(index) {
             this.contents[index].options.push({ option: "", value: "" });
         },
-        upload_option(index,option){ 
-for(var i=0;i<option.length;i++){
-    this.contents[index].options.push({ option:option[i], value:this.slugify(option[i]) });  
-}
-
-          },
-          upload_survey(data){
-            console.log("old",this.contents);
-            this.contents=data;
-            console.log("updated",this.contents);
-          },
+      
         remove_option(index, op_index) {
             this.contents[index].options.splice(op_index, 1);
         },
         remove(index) {
             
-          this.contents.splice(index,1);
+           var removed =this.contents.splice(index,1);
            localStorage.setItem("contents", JSON.stringify(this.contents));
-           handler(this.contents);
-          
+           location.reload();
         },
         down(index){
           
@@ -155,6 +144,7 @@ for(var i=0;i<option.length;i++){
             this.contents[index]=this.contents[index+1];
             this.contents[index+1]=current;
             localStorage.setItem("contents", JSON.stringify(this.contents));
+            location.reload();
         },
         up(index){
             var current=this.contents[index];
@@ -162,11 +152,26 @@ for(var i=0;i<option.length;i++){
             this.contents[index-1]=current;
             var contents=JSON.stringify(this.contents);
             localStorage.setItem("contents", contents);
-         
-     
+          // location.reload();
+          console.log(contents);
+            $.ajax({
+             url:"/template",
+             type:"POST",
+             data:{contents:this.contents},
+             headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+             success:function(res){
+                 $("#main-container").html(res);
+                 console.log(res);
+             }
+
+           })
+       // handler(this.contents);
         },
         
         reorder(){
+            console.log(this.contents);
             function shuffle(array) {
                 for (let i = array.length - 1; i > 0; i--) {
                   const j = Math.floor(Math.random() * (i + 1));
@@ -176,27 +181,8 @@ for(var i=0;i<option.length;i++){
               }
               shuffle(this.contents);
               localStorage.setItem("contents", JSON.stringify(this.contents));
-          
+              location.reload();
             
-        },
-        copyClipboard(index){   
-    navigator.clipboard.writeText(JSON.stringify(this.contents[index]))
-    .then(() => {
-        this.copiedContent=this.contents[index];
-      console.log('Text copied to clipboard: ' +JSON.stringify(this.copiedContent));
-
-      console.log(this.contents);
-    })
-    .catch((error) => {
-      console.error('Failed to copy text to clipboard: ' + error);
-    });
-        },
-        pasteClipboard(index){
-            if(this.copiedContent != "[]")
-this.contents[index]=this.copiedContent;
-tempStore();
-
-this.copiedContent=this.contents[index];
         },
         validate() {
             return validate(this.contents);

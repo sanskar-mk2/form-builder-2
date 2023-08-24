@@ -1,7 +1,11 @@
-<template x-for="(content, index) in contents" :key="index">
-    <div x-data="{add_show: false}" x-on:mouseleave="add_show=false" x-on:mouseenter="add_show=true" class="flex flex-col gap-4">
-        <x-add-input x-data="{dd_idx: index}" x-show="add_show" />
-        <div
+
+
+<template x-for="(content, index) in contents " :key="index">
+ 
+    <div  class="flex flex-col gap-4">
+        
+
+        <div  x-on:click="tempStore()"
             class="card w-full bg-base-100 shadow-xl">
             <div x-on:dragstart.self="dragstart(index, $event.target);$event.dataTransfer.effectAllowed='move';"
                 draggable="true"
@@ -13,7 +17,26 @@
                 x-show="dragged !== index"
                 class="px-4 py-2 hover:cursor-move bg-base-300 card-actions items-center justify-between">
                 <h3 class="font-extrabold text-2xl text-secondary" x-text="`${index+1}. ${content.type.replace(/_/g, ' ').toUpperCase()}`"></h3>
-                <x-remove x-on:click="remove(index)" />
+                <div>
+                    <template x-if="index>=0">
+                        <x-copy x-on:click="copyClipboard(index)"/>
+                    </template>
+                    <template x-if="index>=0">  
+                        <x-paste x-on:click="pasteClipboard(index)"/>
+                        
+                    </template>
+                    
+                    <template x-if="index!=0">
+                        <x-up x-on:click="up(index)" />
+                    </template>
+                    <template x-if="index!= contents.length-1">
+                        <x-down x-on:click="down(index)" />
+                    </template>
+                    <x-remove x-on:click="remove(index)" />
+
+                 
+                </div>
+              
             </div>
             <div x-show="!dragging" class="card-body">
                 <input placeholder="name" x-show="0" readonly x-model="content.name" type="text" class="input input-bordered w-full max-w-xs" >
@@ -71,11 +94,11 @@
                 <template x-if="content.type!='page_break'">
                     <div>
                         <div class="flex gap-8 items-center">
-                            <x-checkbox x-model="content.required" label="Required" />
-                            <button x-on:click="add_logic(index)"
-                                class="btn btn-primary w-32">
-                                Add Logic
-                            </button>
+
+                            <x-checkbox x-data="{required: false}" x-init="required = false" x-on:click="required = !required" x-model="content.required" label="Required" />
+<button x-on:click="add_logic(index)" class="btn btn-primary w-32">
+    Add Logic
+</button>
                         </div>
                         <x-logics class="mt-4" x-show="content.logics.length" />
                     </div>

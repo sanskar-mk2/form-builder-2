@@ -12,7 +12,7 @@ export default function validate(contents) {
     );
     const all_names = no_page_breaks.map((content) => content.name);
     if (new Set(all_names).size !== all_names.length) {
-        return "Name must be unique";
+        return "Label must be unique";
     }
 
     for (let i = 0; i < contents.length; i++) {
@@ -185,5 +185,7 @@ export default function validate(contents) {
         }
     }
     console.log("validate success");
+
+    localStorage.setItem("contents",'[]')
     return 0;
 }
